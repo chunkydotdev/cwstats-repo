@@ -1,0 +1,18 @@
+<div class="home d-flex flex-column align-items-center">
+    <div class="pt-5">
+        <h1 id="home-title" class="text-center">Lookup a wizard by id</h1>
+    </div>
+    <div class="searchinput input-group mb-3">
+        <input
+            v-model="wizardId"
+            type="number"
+            class="form-control color-black"
+            placeholder="Id..."
+            aria-label="Lookup a wizard by id"
+            aria-describedby="home-title"
+        />
+        <div class="input-group-append">
+            <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
+        </div>
+    </div>
+</div>

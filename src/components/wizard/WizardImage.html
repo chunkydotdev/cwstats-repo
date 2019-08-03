@@ -1,0 +1,10 @@
+<div class="wizard-image">
+    <div class="wizard-image--border d-flex justify-content-center align-items-center">
+        <div class="img-container" :class="{'basic-bg': affinity === 1, 'fire-bg': affinity === 2, 'water-bg': affinity === 3, 'wind-bg': affinity === 4}">
+            <img :src="imageUrl" v-if="imageUrl !== ''" />
+            <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+</div>
