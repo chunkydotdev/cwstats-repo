@@ -21,6 +21,16 @@ input {
   max-width: 600px;
 }
 
+.home table tr .td-owner {
+  max-width: 100px;
+}
+
+@media (min-width: 768px) {
+  .home table tr .td-owner {
+    max-width: 100%;
+  }
+}
+
 .home table tr td {
   font-size: 14px;
 }

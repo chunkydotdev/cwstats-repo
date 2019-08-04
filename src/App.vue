@@ -10,8 +10,9 @@
 </template>
 
 <style lang="scss">
+@import "~bootstrap/scss/bootstrap";
 #app {
-  font-family: "Saira Stencil One", cursive;
+  font-family: exocet, cursive;
   text-align: center;
   color: black;
 }
@@ -27,5 +28,9 @@
 }
 body {
   background-color: rgb(255, 242, 77);
+}
+@font-face {
+  font-family: "Exocet";
+  src: url("./assets/exocet.ttf");
 }
 </style>

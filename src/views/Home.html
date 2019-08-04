@@ -30,8 +30,10 @@
                 <tbody>
                     <tr class="text-left" v-for="wizard in topWizards">
                         <td class="pr-3">{{ formatWizardPower(wizard.power) }}</td>
-                        <td class="pr-3">{{ wizard.id }}</td>
-                        <td>{{ wizard.owner }}</td>
+                        <td class="pr-3">
+                            <router-link class="text-dark" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
+                        </td>
+                        <td class="td-owner text-truncate">{{ wizard.owner }}</td>
                     </tr>
                 </tbody></table
             >

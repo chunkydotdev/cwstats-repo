@@ -1,3 +1,6 @@
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/mixins/_breakpoints';
 @import '../shared/scss/bootstrap-ext.scss';
 
 .home {
@@ -7,6 +10,13 @@
 
     table {
         tr {
+            .td-owner {
+                max-width: 100px;
+                @include media-breakpoint-up(md) {
+                    max-width: 100%;
+                }
+            }
+
             td {
                 font-size: 14px;
             }
