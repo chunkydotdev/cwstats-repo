@@ -8,6 +8,14 @@
   color: #fff24d !important;
 }
 
+.bg-dark {
+  background-color: black !important;
+}
+
+.text-warning {
+  color: #fff24d !important;
+}
+
 .border-dark {
   border-color: black !important;
 }

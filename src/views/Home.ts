@@ -34,6 +34,10 @@ export default class Home extends Vue {
     }
 
     public lookupWizardById() {
-        router.push('wizards/' + this.wizardId);
+        let id = this.wizardId.toString();
+        if (id.substring(0, 1) === '0') {
+            id = id.substring(1);
+        }
+        router.push('wizards/' + id);
     }
 }
