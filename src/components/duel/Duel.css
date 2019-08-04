@@ -1,0 +1,47 @@
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 10px solid black;
+  border-radius: 100%;
+  border-bottom-color: transparent;
+  animation: spin 1s infinite linear;
+  position: relative;
+}
+
+.spinner:after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 34px;
+  height: 34px;
+  border: 5px solid white;
+  border-radius: 100%;
+  border-bottom-color: transparent;
+  animation: spin 0.5s infinite linear reverse;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.duel .duel-wizard-image {
+  max-height: 150px;
+}
+
+.win {
+  background-color: lightgreen;
+}
+
+.draw {
+  background-color: yellow;
+}
+
+.loss {
+  background-color: lightcoral;
+}

@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <div class="d-none" id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
+  <div class="mb-5" id="app">
+    <nav class="navbar navbar-dark bg-dark">
+      <router-link class="navbar-brand" to="/">CWSTATS</router-link>
+    </nav>
     <div class="container">
       <router-view />
     </div>

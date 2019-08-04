@@ -5,6 +5,7 @@
     <div class="searchinput input-group mb-3">
         <input
             v-model="wizardId"
+            @keyup.enter="lookupWizardById()"
             type="number"
             class="form-control color-black"
             placeholder="Id..."
@@ -13,6 +14,27 @@
         />
         <div class="input-group-append">
             <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
+        </div>
+    </div>
+    <div class="mt-5 w-100 border-top border-dark">
+        <h1 class="text-center pt-5">Top 100</h1>
+        <div class="d-flex flex-column align-items-center">
+            <table>
+                <thead>
+                    <tr class="text-left">
+                        <th class="pr-3"><u>Power</u></th>
+                        <th class="pr-3"><u>Id</u></th>
+                        <th><u>Owner</u></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-left" v-for="wizard in topWizards">
+                        <td class="pr-3">{{ formatWizardPower(wizard.power) }}</td>
+                        <td class="pr-3">{{ wizard.id }}</td>
+                        <td>{{ wizard.owner }}</td>
+                    </tr>
+                </tbody></table
+            >
         </div>
     </div>
 </div>

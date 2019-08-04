@@ -8,6 +8,10 @@
   color: #fff24d !important;
 }
 
+.border-dark {
+  border-color: black !important;
+}
+
 input {
   color: black !important;
   border-color: black !important;
@@ -15,4 +19,8 @@ input {
 
 .home .searchinput {
   max-width: 600px;
+}
+
+.home table tr td {
+  font-size: 14px;
 }

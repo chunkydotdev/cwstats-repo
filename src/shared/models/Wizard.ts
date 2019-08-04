@@ -1,5 +1,5 @@
 export interface Wizard {
-    id: string;
+    id: number;
     owner: string;
     affinity: number;
     power: string;

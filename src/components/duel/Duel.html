@@ -1,0 +1,40 @@
+<div class="duel bg-dark text-light rounded d-flex flex-column p-3">
+    <div class="justify-content-between text-dark d-flex flex-nowrap px-4">
+        <div class="rounded p-1 bg-success" v-if="wiz1pts > wiz2pts">WIN</div>
+        <div class="rounded p-1 bg-danger" v-else-if="wiz1pts < wiz2pts">LOSS</div>
+        <div class="rounded p-1 bg-success" v-if="wiz2pts > wiz1pts">WIN</div>
+        <div class="rounded p-1 bg-danger" v-else-if="wiz2pts < wiz1pts">LOSS</div>
+    </div>
+    <div class="d-flex justify-content-center text-dark" v-if="wiz1pts === wiz2pts">
+        <div class="rounded p-1 bg-warning">DRAW</div>
+    </div>
+    <div class="d-flex flex-wrap flex-sm-nowrap">
+        <div class="w-100 d-flex flex-nowrap flex-shrink-1">
+            <div class="w-50 d-flex justify-content-center flex-column">
+                <img class="duel-wizard-image ml-n3" :src="imageUrlWiz1" v-if="imageUrlWiz1 !== ''" />
+                <div class="spinner flex-shrink-0" v-else></div>
+                <div class="w-100 ml-n2 text-center">{{ duel.wiz1Id }}</div>
+            </div>
+            <div class="w-50 d-flex flex-column justify-content-center align-items-start">
+                <div class="px-2 py-1 mb-1 rounded ml-n2" :class="isSpellWinDrawLoss(index, 1)" v-for="(spell, index) in duel.moveSet1">
+                    <AffinityComponent :affinity="spell + 1"></AffinityComponent>
+                </div>
+                <div class="p-2">score: {{ wiz1pts }}</div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center flex-shrink-2 w-100">VS</div>
+        <div class="w-100 d-flex flex-nowrap flex-shrink-1 justify-content-end">
+            <div class="w-50 d-flex flex-column justify-content-center align-items-end">
+                <div class="px-2 py-1 mb-1 mr-n3 rounded" :class="isSpellWinDrawLoss(index, 2)" v-for="(spell, index) in duel.moveSet2">
+                    <AffinityComponent :affinity="spell + 1"></AffinityComponent>
+                </div>
+                <div class="p-2">score: {{ wiz2pts }}</div>
+            </div>
+            <div class="w-50 d-flex justify-content-center flex-column">
+                <img class="duel-wizard-image mr-n3" :src="imageUrlWiz2" v-if="imageUrlWiz2 !== ''" />
+                <div class="spinner flex-shrink-0" v-else></div>
+                <div class="mr-n3 text-center">{{ duel.wiz2Id }}</div>
+            </div>
+        </div>
+    </div>
+</div>

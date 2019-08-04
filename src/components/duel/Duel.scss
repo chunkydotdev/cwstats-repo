@@ -1,0 +1,22 @@
+//@import '~bootstrap/scss/_functions';
+//@import '~bootstrap/scss/_variables';
+//@import '~bootstrap/scss/mixins/_breakpoints';
+@import '../../shared/scss/spinner.scss';
+
+.duel {
+    .duel-wizard-image {
+        max-height: 150px;
+    }
+}
+
+.win {
+    background-color: lightgreen;
+}
+
+.draw {
+    background-color: yellow;
+}
+
+.loss {
+    background-color: lightcoral;
+}
