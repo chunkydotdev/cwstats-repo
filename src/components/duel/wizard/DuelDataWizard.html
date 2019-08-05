@@ -1,0 +1,94 @@
+<div class="duel-data-wizard overflow-hidden pt-4 mt-n4" :class="{'duel-data-wizard--expanded': expanded}">
+    <div class="d-flex justify-content-between">
+        <div class="position-relative">
+            <div class="wiz-image position-relative bg-dark rounded-circle">
+                <div class="wiz-image--sizing overflow-hidden rounded-circle">
+                    <img :src="imageUrlWiz1" v-if="imageUrlWiz1 !== ''" />
+                    <div v-else class="d-flex justify-content-center align-items-center w-100">
+                        <div class="spinner mt-5 flex-shrink-0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz1Id }}</div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center flex-shrink-2 w-100 flex-wrap px-2">
+            <div class="w-100 d-flex flex-nowrap justify-content-center py-3">
+                VS
+            </div>
+            <div class="w-100 d-flex" :class="{'justify-content-center': wiz1pts === wiz2pts, 'justify-content-end': wiz1pts < wiz2pts}">
+                <div v-if="wiz1pts !== wiz2pts" class="p-2 rounded bg-success border border-dark">WIN</div>
+                <div v-else class="p-2 rounded bg-warning border border-dark">DRAW</div>
+            </div>
+        </div>
+        <div class="position-relative">
+            <div class="wiz-image wiz-image--wiz2 bg-dark rounded-circle flex-shrink-0">
+                <div class="wiz-image--sizing overflow-hidden rounded-circle">
+                    <img :src="imageUrlWiz2" v-if="imageUrlWiz2 !== ''" />
+                    <div v-else class="d-flex justify-content-center align-items-center w-100">
+                        <div class="spinner mt-5 flex-shrink-0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wiz-id wiz-id--wiz2 text-left bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz2Id }}</div>
+        </div>
+    </div>
+    <div class="d-flex flex-nowrap mt-3">
+        <div class="w-100 d-flex flex-wrap flex-md-nowrap justify-content-between">
+            <div class="order-0">
+                <table class="duel-wizard-stats duel-wizard-stats--1 text-left">
+                    <tr>
+                        <td><u>Pwr</u></td>
+                    </tr>
+                    <tr>
+                        <td>{{ wiz1pwr }}</td>
+                    </tr>
+                    <tr>
+                        <td><u>Pwr+/-</u></td>
+                    </tr>
+                    <tr>
+                        <td>N/A</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="spell-order order-2 order-md-1 d-flex d-md-block flex-column mt-3 mt-md-0">
+                <table class="spell-order--table">
+                    <tr v-for="(spell, index) in duel.moveSet1">
+                        <td>
+                            <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell + 1"></SpellComponent>
+                        </td>
+                        <td class="px-2 text-nowrap">Spell {{ index }}</td>
+                        <td>
+                            <SpellComponent
+                                :win="isSpellWin(index, 2)"
+                                :critical="isSpellCritical(index, 2)"
+                                :affinity="duel.moveSet2[index] + 1"
+                            ></SpellComponent>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="d-flex w-100 justify-content-between flex-nowrap">
+                    <div>Pts: {{ wiz1pts }}</div>
+                    <div>Pts: {{ wiz2pts }}</div>
+                </div>
+            </div>
+
+            <div class="order-1 order-md-2">
+                <table class="duel-wizard-stats duel-wizard-stats--2 text-right">
+                    <tr>
+                        <td><u>Pwr</u></td>
+                    </tr>
+                    <tr>
+                        <td>{{ wiz2pwr }}</td>
+                    </tr>
+                    <tr>
+                        <td><u>Pwr+/-</u></td>
+                    </tr>
+                    <tr>
+                        <td>N/A</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

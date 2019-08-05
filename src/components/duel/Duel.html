@@ -1,57 +1,11 @@
-<div class="duel border-bottom border-dark d-flex flex-column p-3">
-    <div class="d-flex justify-content-between">
-        <div class="position-relative">
-            <div class="wiz-image bg-dark rounded-circle flex-shrink-0">
-                <div class="wiz-image--sizing overflow-hidden rounded-circle">
-                    <img :src="imageUrlWiz1" v-if="imageUrlWiz1 !== ''" />
-                    <div class="spinner flex-shrink-0" v-else></div>
-                </div>
-            </div>
-            <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz1Id }}</div>
-        </div>
-        <div class="d-flex align-items-center justify-content-center flex-shrink-2 w-100 flex-wrap px-2">
-            <div class="w-100 d-flex flex-nowrap justify-content-center py-3">
-                VS
-            </div>
-            <div class="w-100 d-flex" :class="{'justify-content-center': wiz1pts === wiz2pts, 'justify-content-end': wiz1pts < wiz2pts}">
-                <div v-if="wiz1pts !== wiz2pts" class="p-2 rounded bg-success border border-dark">WIN</div>
-                <div v-else class="p-2 rounded bg-warning border border-dark">DRAW</div>
-            </div>
-        </div>
-        <div class="position-relative">
-            <div class="wiz-image wiz-image--wiz2 bg-dark rounded-circle flex-shrink-0">
-                <div class="wiz-image--sizing overflow-hidden rounded-circle">
-                    <img :src="imageUrlWiz2" v-if="imageUrlWiz2 !== ''" />
-                    <div class="spinner flex-shrink-0" v-else></div>
-                </div>
-            </div>
-            <div class="wiz-id wiz-id--wiz2 text-left bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz2Id }}</div>
-        </div>
-    </div>
-    <div class="d-flex flex-nowrap mt-3">
-        <div class="w-100 d-flex flex-nowrap flex-shrink-1">
-            <div class="w-50 d-flex flex-column justify-content-start align-items-start">
-                <div
-                    class="pr-2 mb-1 rounded-lg border border-dark d-flex align-items-center justify-content-center"
-                    :class="isSpellWinDrawLoss(index, 1)"
-                    v-for="(spell, index) in duel.moveSet1"
-                >
-                    <AffinityComponent :affinity="spell + 1"></AffinityComponent>
-                </div>
-                <div>score: {{ wiz1pts }}</div>
-            </div>
-        </div>
-        <div class="w-100 d-flex flex-nowrap flex-shrink-1 justify-content-end">
-            <div class="w-50 d-flex flex-column justify-content-start align-items-end">
-                <div
-                    class="pl-2 mb-1 rounded-lg border border-dark d-flex align-items-center justify-content-center"
-                    :class="isSpellWinDrawLoss(index, 2)"
-                    v-for="(spell, index) in duel.moveSet2"
-                >
-                    <AffinityComponent :affinity="spell + 1"></AffinityComponent>
-                </div>
-                <div>score: {{ wiz2pts }}</div>
-            </div>
-        </div>
-    </div>
+<div class="duel d-flex flex-column p-3">
+    <DuelDataWizardComponent :expanded="expanded" :wizard="wizard" :wizard2="wizard2" :duel="duel"></DuelDataWizardComponent>
+    <button
+        class="expand-duel border-0 mb-n3 d-flex bg-dark align-items-center justify-content-center"
+        :class="{'expand-duel--expanded': expanded}"
+        @click="expanded = !expanded"
+        @keydown.enter="expanded = !expanded"
+    >
+        <i class="fas fa-caret-down"></i>
+    </button>
 </div>

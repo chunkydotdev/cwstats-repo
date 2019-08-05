@@ -5,6 +5,7 @@ import { Wizard } from '@/shared/models/Wizard';
 import WizardService from '@/services/wizard.service';
 import ApiResponse from '@/shared/models/ApiResponse';
 import AffinityComponent from '@/components/affinity/Affinity';
+import SpellComponent from '@/components/spell/Spell';
 import { testDuels } from '@/shared/models/DuelTestData';
 import DuelComponent from '@/components/duel/Duel';
 import Duel from '@/shared/models/Duel';
@@ -13,6 +14,7 @@ import Duel from '@/shared/models/Duel';
     components: {
         WizardImageComponent,
         AffinityComponent,
+        SpellComponent,
         DuelComponent,
     },
 })

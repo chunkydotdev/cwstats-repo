@@ -1,0 +1,77 @@
+.spell {
+  background-size: 0.8rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border-bottom-width: 3px !important;
+  border-right-width: 3px !important;
+  color: black;
+  background-color: white;
+  position: relative;
+}
+
+.spell:after {
+  content: '';
+  height: 2px;
+  width: 2px;
+  background-color: #fff032;
+  position: absolute;
+  bottom: -3px;
+  left: -1px;
+}
+
+.spell:before {
+  content: '';
+  height: 2px;
+  width: 2px;
+  background-color: #fff032;
+  position: absolute;
+  top: -1px;
+  right: -3px;
+}
+
+.spell.basic {
+  background-image: url("../../assets/basic.svg");
+}
+
+.spell.basic.color {
+  background-color: #e4e0fc;
+}
+
+.spell.fire {
+  background-image: url("../../assets/fire.svg");
+}
+
+.spell.fire.color {
+  background-color: #ffe8ee;
+}
+
+.spell.water {
+  background-image: url("../../assets/water.svg");
+}
+
+.spell.water.color {
+  background-color: #c9f4f4;
+}
+
+.spell.wind {
+  background-image: url("../../assets/wind.svg");
+}
+
+.spell.wind.color {
+  background-color: #d7ffbd;
+}
+
+.spell.win {
+  background-color: #ffff85;
+}
+
+.spell.critical {
+  background-color: lightblue;
+}
+
+.spell.win.critical {
+  background-color: #ffc033;
+}

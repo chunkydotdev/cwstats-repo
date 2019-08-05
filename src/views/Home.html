@@ -16,7 +16,7 @@
             <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
         </div>
     </div>
-    <div class="mt-5 w-100 border-top border-dark">
+    <div class="high-scores pb-5 w-100">
         <h1 class="text-center pt-5">Top 100</h1>
         <div class="d-flex flex-column align-items-center">
             <table>
@@ -31,12 +31,12 @@
                     <tr class="text-left" v-for="wizard in topWizards">
                         <td class="pr-3">{{ formatWizardPower(wizard.power) }}</td>
                         <td class="pr-3">
-                            <router-link class="text-dark" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
+                            <router-link class="text-white" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
                         </td>
                         <td class="td-owner text-truncate">{{ wizard.owner }}</td>
                     </tr>
-                </tbody></table
-            >
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

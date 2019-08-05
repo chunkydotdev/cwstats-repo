@@ -1,27 +1,10 @@
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/bootstrap/scss/variables';
-@import '../../../node_modules/bootstrap/scss/mixins/_breakpoints';
-@import '../../shared/scss/bootstrap-ext.scss';
-@import '../../shared/scss/spinner.scss';
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../shared/scss/bootstrap-ext.scss';
+@import '../../../shared/scss/spinner.scss';
 
 .duel {
-    .expand-duel {
-        height: 20px;
-        //background: url('../../assets/book-light.svg') no-repeat;
-        //background-position: center center;
-        //background-size: 15px;
-        .fa-caret-down {
-            color: white;
-        }
-
-        &--expanded {
-            .fa-caret-down {
-                transform: rotateZ(180deg);
-                transition: all 0.2s;
-            }
-        }
-    }
-
     .wiz-id {
         position: absolute;
         top: 10px;

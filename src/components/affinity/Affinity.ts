@@ -4,6 +4,10 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 export default class AffinityComponent extends Vue {
     @Prop()
     public affinity!: number;
+    @Prop({
+        default: false,
+    })
+    public small!: boolean;
 
     constructor() {
         super();

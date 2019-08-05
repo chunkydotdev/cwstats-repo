@@ -8,6 +8,22 @@
   color: #fff24d !important;
 }
 
+.w-33 {
+  width: 33% !important;
+}
+
+.bg-success {
+  background-color: lightgreen !important;
+}
+
+.bg-dark {
+  background-color: black !important;
+}
+
+.text-warning {
+  color: #fff24d !important;
+}
+
 .border-dark {
   border-color: black !important;
 }
@@ -19,6 +35,16 @@ input {
 
 .home .searchinput {
   max-width: 600px;
+}
+
+.home .high-scores {
+  background: url("../assets/melted-cheeze.svg") repeat-x;
+  background-size: 200%;
+  background-color: black;
+  background-position: top -5px left -5px;
+  color: white;
+  padding-top: 100px;
+  min-height: 80vh;
 }
 
 .home table tr .td-owner {

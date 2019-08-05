@@ -1,6 +1,6 @@
 <div
-    class="affinity pl-2 pr-4 rounded-lg border border-dark d-inline-block flex-grow-0"
-    :class="{'basic': affinity === 1, 'fire': affinity === 2, 'water': affinity === 3, 'wind': affinity === 4}"
+    class="affinity pr-4 border border-dark d-inline-flex flex-grow-0 align-items-center rounded"
+    :class="{'basic': affinity === 1, 'fire': affinity === 2, 'water': affinity === 3, 'wind': affinity === 4, 'pl-2': !small}"
 >
-    <div>{{ getAffinityName }}</div>
+    <div v-if="!small">{{ getAffinityName }}</div>
 </div>

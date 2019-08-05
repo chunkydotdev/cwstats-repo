@@ -65,20 +65,16 @@ input {
   }
 }
 
-.duel .expand-duel {
-  height: 20px;
-}
-
-.duel .expand-duel .fa-caret-down {
-  color: white;
-}
-
-.duel .expand-duel--expanded .fa-caret-down {
-  transform: rotateZ(180deg);
+.duel-data-wizard {
+  max-height: 135px;
   transition: all 0.2s;
 }
 
-.duel .wiz-id {
+.duel-data-wizard--expanded {
+  max-height: 550px;
+}
+
+.duel-data-wizard .wiz-id {
   position: absolute;
   top: 10px;
   width: 100px;
@@ -87,60 +83,59 @@ input {
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id {
+  .duel-data-wizard .wiz-id {
     font-size: 1rem;
     z-index: 0;
   }
 }
 
-.duel .wiz-id--wiz1 {
+.duel-data-wizard .wiz-id--wiz1 {
   left: 10px;
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id--wiz1 {
+  .duel-data-wizard .wiz-id--wiz1 {
     left: initial;
     right: -75px;
   }
 }
 
-.duel .wiz-id--wiz2 {
+.duel-data-wizard .wiz-id--wiz2 {
   right: 10px;
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id--wiz2 {
+  .duel-data-wizard .wiz-id--wiz2 {
     right: initial;
     left: -75px;
   }
 }
 
-.duel .wiz-image {
+.duel-data-wizard .wiz-image {
   width: 50px;
   height: 50px;
   border-width: 5px !important;
-  position: relative;
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-image {
+  .duel-data-wizard .wiz-image {
     width: 100px;
     height: 100px;
   }
 }
 
-.duel .wiz-image--wiz2 img {
+.duel-data-wizard .wiz-image--wiz2 img {
   margin-left: -45px !important;
   transform: scaleX(-1);
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-image--wiz2 img {
+  .duel-data-wizard .wiz-image--wiz2 img {
     margin-left: -90px !important;
   }
 }
 
-.duel .wiz-image--sizing {
+.duel-data-wizard .wiz-image--sizing {
   position: absolute;
   top: -10px;
   left: -2.5px;
@@ -149,7 +144,7 @@ input {
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-image--sizing {
+  .duel-data-wizard .wiz-image--sizing {
     width: 110px;
     height: 120px;
     top: -20px;
@@ -157,7 +152,7 @@ input {
   }
 }
 
-.duel .wiz-image img {
+.duel-data-wizard .wiz-image img {
   width: 150px;
   height: auto;
   margin-top: -25px;
@@ -165,14 +160,24 @@ input {
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-image img {
+  .duel-data-wizard .wiz-image img {
     width: 300px;
     margin-top: -50px;
     margin-left: -100px;
   }
 }
 
-.duel .spell-table tr {
+.duel-data-wizard .spell-order {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .duel-data-wizard .spell-order {
+    width: auto;
+  }
+}
+
+.duel-data-wizard .spell-order--table tr {
   height: 20px;
 }
 

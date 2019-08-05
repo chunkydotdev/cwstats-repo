@@ -8,6 +8,10 @@
   color: #fff24d !important;
 }
 
+.w-33 {
+  width: 33% !important;
+}
+
 .bg-success {
   background-color: lightgreen !important;
 }

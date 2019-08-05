@@ -8,6 +8,16 @@
         max-width: 600px;
     }
 
+    .high-scores {
+        background: url('../assets/melted-cheeze.svg') repeat-x;
+        background-size: 200%;
+        background-color: black;
+        background-position: top -5px left -5px;
+        color: white;
+        padding-top: 100px;
+        min-height: 80vh;
+    }
+
     table {
         tr {
             .td-owner {

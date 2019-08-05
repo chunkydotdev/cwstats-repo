@@ -1,0 +1,72 @@
+@import '../../shared/scss/colors.scss';
+
+.spell {
+    background-size: 0.8rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    border-bottom-width: 3px !important;
+    border-right-width: 3px !important;
+    color: black;
+    background-color: white;
+    position: relative;
+
+    &:after {
+        content: '';
+        height: 2px;
+        width: 2px;
+        background-color: $color-yellow-primary;
+        position: absolute;
+        bottom: -3px;
+        left: -1px;
+    }
+
+    &:before {
+        content: '';
+        height: 2px;
+        width: 2px;
+        background-color: $color-yellow-primary;
+        position: absolute;
+        top: -1px;
+        right: -3px;
+    }
+
+    &.basic {
+        background-image: url('../../assets/basic.svg');
+        &.color {
+            background-color: $color-basic;
+        }
+    }
+    &.fire {
+        background-image: url('../../assets/fire.svg');
+        &.color {
+            background-color: $color-fire;
+        }
+    }
+    &.water {
+        background-image: url('../../assets/water.svg');
+        &.color {
+            background-color: $color-water;
+        }
+    }
+    &.wind {
+        background-image: url('../../assets/wind.svg');
+        &.color {
+            background-color: $color-wind;
+        }
+    }
+
+    &.win {
+        background-color: $color-yellow-01;
+    }
+
+    &.critical {
+        background-color: lightblue;
+    }
+
+    &.win.critical {
+        background-color: $color-yellow-05;
+    }
+}
