@@ -2,7 +2,7 @@
   <div class="mb-5" id="app">
     <nav class="navbar navbar-dark bg-dark">
       <router-link class="navbar-brand" to="/">CWSTATS</router-link>
-      <form v-if="currentRoute !== 'home'" class="form-inline d-flex flex-nowrap">
+      <div v-if="currentRoute !== 'home'" class="form-inline d-flex flex-nowrap">
         <input
           v-model="wizardId"
           @keyup.enter="lookupWizardById()"
@@ -15,7 +15,7 @@
         <div class="input-group-append">
           <button class="btn border-black text-warning" type="button" @click="lookupWizardById()">Go</button>
         </div>
-      </form>
+      </div>
     </nav>
     <div class="container">
       <router-view />

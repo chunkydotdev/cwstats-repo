@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import WizardImageComponent from '../../components/wizard/WizardImage';
 import router from '@/router';
 import { Wizard } from '@/shared/models/Wizard';
@@ -35,6 +35,15 @@ export default class WizardStatsComponent extends Vue {
         this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
 
         this.duels = testDuels;
+    }
+
+    @Watch('$route')
+    public onRouteChange() {
+        // tslint:disable-next-line:no-string-literal
+        this.wizardId = +router.currentRoute.params['id'];
+
+        // tslint:disable-next-line:max-line-length
+        this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
     }
 
     public setWizard(wizard: Wizard) {

@@ -25,6 +25,6 @@ export default class App extends Vue {
         if (id.substring(0, 1) === '0') {
             id = id.substring(1);
         }
-        router.replace('wizards/' + id);
+        router.push('/wizards/' + id);
     }
 }
