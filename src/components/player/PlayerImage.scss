@@ -1,0 +1,27 @@
+//@import '~bootstrap/scss/_functions';
+//@import '~bootstrap/scss/_variables';
+//@import '~bootstrap/scss/mixins/_breakpoints';
+@import '../../shared/scss/spinner.scss';
+
+.player-image {
+    &--border {
+        background-color: white;
+        outline: 1px solid black;
+        width: 220px;
+        max-width: 100%;
+        height: 220px;
+
+        & > .img-container {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            outline: 1px solid black;
+
+            .player-img {
+                background: url('../../assets/cheeze-head-color.svg') no-repeat;
+                background-position: center center;
+                background-size: 80%;
+            }
+        }
+    }
+}

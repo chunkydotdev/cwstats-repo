@@ -21,8 +21,8 @@ export default class Home extends Vue {
         this.service.getTopWizardsByPower(100).then((response: ApiResponse<Wizard[]>) => this.setTopWizards(response.result));
     }
 
-    public formatWizardPower(power: string): string {
-        return power.substring(0, power.length - 12);
+    public formatWizardPower(power: number): string {
+        return power.toString().substring(0, power.toString().length - 12);
     }
 
     public setTopWizards(wizards: Wizard[]) {

@@ -1,0 +1,96 @@
+<div class="playerstats d-flex flex-nowrap flex-column flex-md-row pt-5">
+    <div class="playerstats--info d-flex flex-column">
+        <PlayerImageComponent></PlayerImageComponent>
+        <div class="text-truncate mt-3">
+            <u>
+                {{ playerAddress }}
+            </u>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div>Wins</div>
+            <div>{{ player.wins }}</div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div>Losses</div>
+            <div>{{ player.losses }}</div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div>Draws</div>
+            <div>{{ player.draws }}</div>
+        </div>
+    </div>
+    <div class="w-100 d-flex flex-column ml-0 ml-md-5 text-left">
+        <div class="w-100 mt-5 mt-md-0">
+            <h3 class="text-left"><u>Common spells (NOT REAL DATA)</u></h3>
+            <div class="w-100 d-flex flex-column mb-3 text-left">
+                <div class="mb-2">
+                    <div class="mr-2 w-100">Basic combination</div>
+                    <div class="d-flex flex-wrap">
+                        <div class="mr-2" v-for="spell in player.basicMoveSet">
+                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+                        </div>
+                        <div v-if="player.basicMoveSet.length === 0">N/A</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="mr-2 w-100">Fire combination</div>
+                    <div class="d-flex flex-wrap">
+                        <div class="mr-2" v-for="spell in player.fireMoveSet">
+                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+                        </div>
+                        <div v-if="player.fireMoveSet.length === 0">N/A</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="mr-2 w-100">Water combination</div>
+                    <div class="d-flex flex-wrap">
+                        <div class="mr-2" v-for="spell in player.waterMoveSet">
+                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+                        </div>
+                        <div v-if="player.waterMoveSet.length === 0">N/A</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="mr-2 w-100">Wind combination</div>
+                    <div class="d-flex flex-wrap">
+                        <div class="mr-2" v-for="spell in player.windMoveSet">
+                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+                        </div>
+                        <div v-if="player.windMoveSet.length === 0">N/A</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 mt-5 mt-md-0">
+            <h3 class="text-left"><u>Wizards</u></h3>
+            <div class="w-100">Basic</div>
+            <div class="w-100 d-flex flex-wrap">
+                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in basicWizards">
+                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
+                </router-link>
+                <div class="mr-2 mb-2" v-if="basicWizards.length === 0">N/A</div>
+            </div>
+            <div class="w-100">Fire</div>
+            <div class="w-100 d-flex flex-wrap">
+                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in fireWizards">
+                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
+                </router-link>
+                <div class="mr-2 mb-2" v-if="fireWizards.length === 0">N/A</div>
+            </div>
+            <div class="w-100">Water</div>
+            <div class="w-100 d-flex flex-wrap">
+                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in waterWizards">
+                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
+                </router-link>
+                <div class="mr-2 mb-2" v-if="waterWizards.length === 0">N/A</div>
+            </div>
+            <div class="w-100">Wind</div>
+            <div class="w-100 d-flex flex-wrap">
+                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in windWizards">
+                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
+                </router-link>
+                <div class="mr-2 mb-2" v-if="windWizards.length === 0">N/A</div>
+            </div>
+        </div>
+    </div>
+</div>

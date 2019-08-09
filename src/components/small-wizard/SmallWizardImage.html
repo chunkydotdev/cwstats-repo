@@ -1,0 +1,20 @@
+<div class="small-wizard-image text-dark">
+    <div class="small-wizard-image--border d-flex justify-content-center align-items-center position-relative">
+        <div
+            class="img-container"
+            :class="{'basic-bg': wizard.affinity === 1, 'fire-bg': wizard.affinity === 2, 'water-bg': wizard.affinity === 3, 'wind-bg': wizard.affinity === 4}"
+        >
+            <img :src="imageUrl" v-if="imageUrl !== ''" />
+            <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <div
+            class="small-wizard-info position-absolute d-flex justify-content-between border-top border-dark px-2"
+            :class="{'basic-bg-dark': wizard.affinity === 1, 'fire-bg-dark': wizard.affinity === 2, 'water-bg-dark': wizard.affinity === 3, 'wind-bg-dark': wizard.affinity === 4}"
+        >
+            {{ getWizardPower }}
+        </div>
+        <div class="small-wizard-id position-absolute bg-white border-bottom border-left border-dark px-2"> #{{ wizard.id }} </div>
+    </div>
+</div>

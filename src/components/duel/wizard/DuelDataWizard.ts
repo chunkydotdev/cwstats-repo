@@ -58,8 +58,9 @@ export default class DuelDataWizardComponents extends Vue {
 
     public get wiz1pwr(): string {
         if (this.duel.wiz1Id > 0) {
-            const power1 = this.wizard.power.substring(0, this.wizard.power.length - 12);
-            const power2 = this.wizard.power.substring(power1.length, this.wizard.power.length - 9);
+            const power1 = this.wizard.power.toString().substring(0, this.wizard.power.toString().length - 12);
+            // tslint:disable-next-line:max-line-length
+            const power2 = this.wizard.power.toString().substring(power1.length, this.wizard.power.toString().length - 9);
             return power1;
         }
         return '0';
@@ -80,8 +81,9 @@ export default class DuelDataWizardComponents extends Vue {
 
     public get wiz2pwr(): string {
         if (this.duel.wiz2Id > 0) {
-            const power1 = this.wizard2.power.substring(0, this.wizard2.power.length - 12);
-            const power2 = this.wizard2.power.substring(power1.length, this.wizard2.power.length - 9);
+            const power1 = this.wizard2.power.toString().substring(0, this.wizard2.power.toString().length - 12);
+            // tslint:disable-next-line:max-line-length
+            const power2 = this.wizard2.power.toString().substring(power1.length, this.wizard2.power.toString().length - 9);
             return power1;
         }
         return '0';
@@ -108,26 +110,26 @@ export default class DuelDataWizardComponents extends Vue {
     }
 
     private calculateSpellWinDrawLoss(spell1: number, spell2: number): number {
-        if (spell1 === 1) {
-            if (spell2 === 2) {
+        if (spell1 === 2) {
+            if (spell2 === 3) {
                 return -1;
-            } else if (spell2 === 3) {
+            } else if (spell2 === 4) {
                 return 1;
             } else {
                 return 0;
             }
-        } else if (spell1 === 2) {
-            if (spell2 === 3) {
+        } else if (spell1 === 3) {
+            if (spell2 === 4) {
                 return -1;
-            } else if (spell2 === 1) {
+            } else if (spell2 === 2) {
                 return 1;
             } else {
                 return 0;
             }
         } else {
-            if (spell2 === 1) {
+            if (spell2 === 2) {
                 return -1;
-            } else if (spell2 === 2) {
+            } else if (spell2 === 3) {
                 return 1;
             } else {
                 return 0;

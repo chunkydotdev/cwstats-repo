@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5" id="app">
+  <div id="app">
     <nav class="navbar navbar-dark bg-dark">
       <router-link class="navbar-brand" to="/">CWSTATS</router-link>
       <div v-if="currentRoute !== 'home'" class="form-inline d-flex flex-nowrap">
@@ -17,7 +17,9 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div
+      :class="{'container': currentRoute !== 'home', 'container-fluid': currentRoute === 'home'}"
+    >
       <router-view />
     </div>
   </div>

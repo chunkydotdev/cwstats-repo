@@ -1,23 +1,27 @@
 <div class="home d-flex flex-column align-items-center">
-    <div class="pt-5">
-        <h1 id="home-title" class="text-center">Lookup a wizard by id</h1>
-    </div>
-    <div class="searchinput input-group mb-3">
-        <input
-            v-model="wizardId"
-            @keyup.enter="lookupWizardById()"
-            type="number"
-            class="form-control color-black"
-            placeholder="Id..."
-            aria-label="Lookup a wizard by id"
-            aria-describedby="home-title"
-        />
-        <div class="input-group-append">
-            <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
+    <div class="container">
+        <div class="pt-5">
+            <h1 id="home-title" class="text-center">Lookup a wizard by id</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="searchinput input-group mb-3">
+                <input
+                    v-model="wizardId"
+                    @keyup.enter="lookupWizardById()"
+                    type="number"
+                    class="form-control color-black"
+                    placeholder="Id..."
+                    aria-label="Lookup a wizard by id"
+                    aria-describedby="home-title"
+                />
+                <div class="input-group-append">
+                    <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="high-scores pb-5 w-100">
-        <h1 class="text-center pt-5">Top 100</h1>
+        <h1 class="text-center">Top 100</h1>
         <div class="d-flex flex-column align-items-center">
             <table>
                 <thead>
@@ -33,7 +37,9 @@
                         <td class="pr-3">
                             <router-link class="text-white" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
                         </td>
-                        <td class="td-owner text-truncate">{{ wizard.owner }}</td>
+                        <td class="td-owner text-truncate">
+                            <router-link class="text-white" :to="'/players/'+wizard.owner">{{ wizard.owner }}</router-link>
+                        </td>
                     </tr>
                 </tbody>
             </table>

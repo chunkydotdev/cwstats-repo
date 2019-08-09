@@ -46,7 +46,7 @@
                         <td><u>Pwr+/-</u></td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
+                        <td>{{ duel.wiz1PowerChange }}</td>
                     </tr>
                 </table>
             </div>
@@ -54,15 +54,11 @@
                 <table class="spell-order--table">
                     <tr v-for="(spell, index) in duel.moveSet1">
                         <td>
-                            <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell + 1"></SpellComponent>
+                            <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell"></SpellComponent>
                         </td>
                         <td class="px-2 text-nowrap">Spell {{ index }}</td>
                         <td>
-                            <SpellComponent
-                                :win="isSpellWin(index, 2)"
-                                :critical="isSpellCritical(index, 2)"
-                                :affinity="duel.moveSet2[index] + 1"
-                            ></SpellComponent>
+                            <SpellComponent :win="isSpellWin(index, 2)" :critical="isSpellCritical(index, 2)" :affinity="duel.moveSet2[index]"></SpellComponent>
                         </td>
                     </tr>
                 </table>
@@ -85,7 +81,7 @@
                         <td><u>Pwr+/-</u></td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
+                        <td>{{ duel.wiz2PowerChange }}</td>
                     </tr>
                 </table>
             </div>
