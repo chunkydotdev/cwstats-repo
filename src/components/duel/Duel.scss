@@ -5,32 +5,47 @@
 @import '../../shared/scss/spinner.scss';
 
 .duel {
-    .expand-duel {
-        height: 20px;
-        //background: url('../../assets/book-light.svg') no-repeat;
-        //background-position: center center;
-        //background-size: 15px;
-        .fa-caret-down {
-            color: white;
+    outline: 1px solid black;
+    border: 5px solid white;
+    &--inner-outline {
+        outline: 1px solid black;
+        &.win {
+            background-color: lightgreen;
+        }
+        &.loss {
+            background-color: lightcoral;
+        }
+        &.draw {
+            background-color: $color-yellow-04;
         }
 
-        &--expanded {
+        .expand-duel {
+            height: 20px;
+            //background: url('../../assets/book-light.svg') no-repeat;
+            //background-position: center center;
+            //background-size: 15px;
             .fa-caret-down {
-                transform: rotateZ(180deg);
-                transition: all 0.2s;
+                color: white;
+            }
+
+            &--expanded {
+                .fa-caret-down {
+                    transform: rotateZ(180deg);
+                    transition: all 0.2s;
+                }
             }
         }
-    }
 
-    .wiz-id {
-        position: absolute;
-        top: 10px;
-        width: 100px;
-        font-size: 0.7rem;
-        z-index: -1;
-        @include media-breakpoint-up(md) {
-            font-size: 1rem;
-            z-index: 0;
+        .wiz-id {
+            position: absolute;
+            top: 10px;
+            width: 100px;
+            font-size: 0.7rem;
+            z-index: -1;
+            @include media-breakpoint-up(md) {
+                font-size: 1rem;
+                z-index: 0;
+            }
         }
 
         &--wiz1 {

@@ -1,0 +1,20 @@
+<div class="leaderboard-player-power">
+    <table>
+        <thead>
+            <tr class="text-left">
+                <th class="pr-3"><u>#</u></th>
+                <th class="pr-3"><u>Wizards</u></th>
+                <th><u>Player</u></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-left" v-for="(player, index) in players">
+                <td class="pr-3">{{ index + 1 }}</td>
+                <td class="pr-3">{{ player.wizardCount }}</td>
+                <td class="td-owner text-truncate">
+                    <router-link class="text-white" :to="'/players/'+player.address">{{ player.address }}</router-link>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

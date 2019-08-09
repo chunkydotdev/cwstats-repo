@@ -89,6 +89,11 @@ export default class DuelDataWizardComponents extends Vue {
         return '0';
     }
 
+    public readablePower(power: number) {
+        const power1 = power.toString().substring(0, power.toString().length - 12);
+        return power1;
+    }
+
     public isSpellWin(index: number, wizard: number): boolean {
         let result = 0;
         if (wizard === 1) {

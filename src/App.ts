@@ -3,14 +3,19 @@ import router from '@/router';
 
 @Component({})
 export default class App extends Vue {
-    public wizardId: number;
+    public searchTerm: string;
+    public searchCategory: string;
+    public searchCategories: string[];
+    public placeholder: string;
     public currentRoute: string | undefined;
 
     constructor() {
         super();
 
-        // @ts-ignore
-        this.wizardId = null;
+        this.searchTerm = '';
+        this.searchCategories = ['wizard', 'player'];
+        this.searchCategory = this.searchCategories[0];
+        this.placeholder = 'Id...';
 
         this.currentRoute = router.currentRoute.name;
     }
@@ -20,11 +25,24 @@ export default class App extends Vue {
         this.currentRoute = router.currentRoute.name;
     }
 
-    public lookupWizardById() {
-        let id = this.wizardId.toString();
-        if (id.substring(0, 1) === '0') {
-            id = id.substring(1);
+    @Watch('searchCategory')
+    public onSearchCategoryChange() {
+        if (this.searchCategory === 'wizard') {
+            this.placeholder = 'Id...';
+        } else {
+            this.placeholder = 'Address...';
         }
-        router.push('/wizards/' + id);
+    }
+
+    public lookup() {
+        if (this.searchCategory === 'wizard') {
+            let id = this.searchTerm;
+            if (id.substring(0, 1) === '0') {
+                id = id.substring(1);
+            }
+            router.push('/wizards/' + id);
+        } else {
+            router.push('/players/' + this.searchTerm);
+        }
     }
 }

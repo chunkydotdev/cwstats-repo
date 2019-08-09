@@ -8,6 +8,7 @@ import Duel from '@/shared/models/Duel';
 import PlayerImageComponent from '../../components/player/PlayerImage';
 import SpellComponent from '../../components/spell/Spell';
 import SmallWizardImageComponent from '../../components/small-wizard/SmallWizardImage';
+import web3 from 'web3';
 
 @Component({
     components: {
@@ -30,10 +31,10 @@ export default class PlayerStatsComponent extends Vue {
     constructor() {
         super();
 
-        this.playerAddress = router.currentRoute.params.address;
+        this.playerAddress = web3.utils.toChecksumAddress(router.currentRoute.params.address);
         this.service = new WizardService();
         // tslint:disable-next-line:max-line-length
-        this.player = { address: '', wins: 0, losses: 0, draws: 0, duelCount: 0, wizardCount: 0, windMoveSet: [], waterMoveSet: [], basicMoveSet: [], fireMoveSet: [] };
+        this.player = { address: '', wins: 0, losses: 0, draws: 0, duelCount: 0, wizardCount: 0, wizardPowerSum: 0, windMoveSet: [], waterMoveSet: [], basicMoveSet: [], fireMoveSet: [] };
         this.wizards = [];
         this.basicWizards = [];
         this.fireWizards = [];

@@ -1,11 +1,13 @@
-<div class="duel d-flex flex-column p-3">
-    <DuelDataWizardComponent :expanded="expanded" :wizard="wizard" :wizard2="wizard2" :duel="duel"></DuelDataWizardComponent>
-    <button
-        class="expand-duel border-0 mb-n3 d-flex bg-dark align-items-center justify-content-center"
-        :class="{'expand-duel--expanded': expanded}"
-        @click="expanded = !expanded"
-        @keydown.enter="expanded = !expanded"
-    >
-        <i class="fas fa-caret-down"></i>
-    </button>
+<div class="duel d-flex flex-column" :class="{'win': isWin, 'loss': isLoss, 'draw': isDraw}">
+    <div class="duel--inner-outline p-3">
+        <DuelDataWizardComponent :expanded="expanded" :wizard="wizard" :wizard2="wizard2" :duel="duel"></DuelDataWizardComponent>
+        <button
+            class="expand-duel border-0 mb-n3 d-flex bg-dark align-items-center justify-content-center"
+            :class="{'expand-duel--expanded': expanded}"
+            @click="expanded = !expanded"
+            @keydown.enter="expanded = !expanded"
+        >
+            <i class="fas fa-caret-down"></i>
+        </button>
+    </div>
 </div>

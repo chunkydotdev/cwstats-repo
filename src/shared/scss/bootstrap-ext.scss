@@ -1,3 +1,5 @@
+@import '../scss/colors.scss';
+
 .btn-outline {
     border-color: black !important;
     color: black !important;
@@ -5,6 +7,18 @@
     &:hover {
         background-color: black !important;
         color: rgb(255, 242, 77) !important;
+    }
+}
+
+.custom-select {
+    background-color: $color-yellow-primary;
+    color: black;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+
+    &--nav {
+        border-radius: 0.25rem !important;
+        background-color: black !important;
+        color: $color-yellow-primary;
     }
 }
 

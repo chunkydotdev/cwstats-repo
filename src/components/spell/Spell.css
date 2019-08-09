@@ -5,31 +5,10 @@
   font-size: 14px;
   width: 30px;
   height: 30px;
-  border-bottom-width: 3px !important;
-  border-right-width: 3px !important;
   color: black;
   background-color: white;
   position: relative;
-}
-
-.spell:after {
-  content: '';
-  height: 2px;
-  width: 2px;
-  background-color: #fff032;
-  position: absolute;
-  bottom: -3px;
-  left: -1px;
-}
-
-.spell:before {
-  content: '';
-  height: 2px;
-  width: 2px;
-  background-color: #fff032;
-  position: absolute;
-  top: -1px;
-  right: -3px;
+  box-shadow: 3px 3px 0 0 black;
 }
 
 .spell.basic {

@@ -2,6 +2,7 @@
 @import '../../node_modules/bootstrap/scss/variables';
 @import '../../node_modules/bootstrap/scss/mixins/_breakpoints';
 @import '../shared/scss/bootstrap-ext.scss';
+@import '../shared/scss/buttons.scss';
 
 .home {
     margin-left: -15px;
@@ -24,9 +25,6 @@
         @include media-breakpoint-up(md) {
             padding-top: 20vh;
         }
-        h1 {
-            -webkit-text-stroke: 1px black;
-        }
     }
 
     table {
@@ -41,6 +39,23 @@
             td {
                 font-size: 14px;
             }
+        }
+    }
+}
+
+.btn-cw {
+    &.active {
+        position: relative;
+        &:after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -15px;
+            height: 25px;
+            content: '';
+            background: url('../assets/udders-color.svg') no-repeat;
+            background-size: 25px;
+            background-position: top center;
         }
     }
 }

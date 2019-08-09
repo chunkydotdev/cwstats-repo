@@ -5,6 +5,7 @@ export default interface Player {
     draws: number;
     duelCount: number;
     wizardCount: number;
+    wizardPowerSum: number;
     windMoveSet: number[];
     fireMoveSet: number[];
     waterMoveSet: number[];

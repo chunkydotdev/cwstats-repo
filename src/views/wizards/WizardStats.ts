@@ -22,11 +22,13 @@ export default class WizardStatsComponent extends Vue {
     public wizard: Wizard;
     public wizardService: WizardService;
     public duels: Duel[];
+    public loadingWizard: boolean;
 
     constructor() {
         super();
 
         this.wizardService = new WizardService();
+        this.loadingWizard = true;
 
         // tslint:disable-next-line:no-string-literal
         this.wizardId = +router.currentRoute.params['id'];
@@ -46,12 +48,17 @@ export default class WizardStatsComponent extends Vue {
         // tslint:disable-next-line:no-string-literal
         this.wizardId = +router.currentRoute.params['id'];
 
+        this.loadingWizard = true;
         // tslint:disable-next-line:max-line-length
         this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
+
+        // tslint:disable-next-line:max-line-length
+        this.wizardService.getDuels([this.wizardId]).then((response: ApiResponse<Duel[]>) => this.setDuels(response.result));
     }
 
     public setWizard(wizard: Wizard) {
         this.wizard = wizard;
+        this.loadingWizard = false;
     }
 
     public setDuels(duels: Duel[]) {

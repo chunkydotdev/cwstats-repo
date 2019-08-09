@@ -8,6 +8,18 @@
   color: #fff24d !important;
 }
 
+.custom-select {
+  background-color: #fff032;
+  color: black;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.custom-select--nav {
+  border-radius: 0.25rem !important;
+  background-color: black !important;
+  color: #fff032;
+}
+
 .w-33 {
   width: 33% !important;
 }
@@ -65,20 +77,41 @@ input {
   }
 }
 
-.duel .expand-duel {
+.duel {
+  outline: 1px solid black;
+  border: 5px solid white;
+}
+
+.duel--inner-outline {
+  outline: 1px solid black;
+}
+
+.duel--inner-outline.win {
+  background-color: lightgreen;
+}
+
+.duel--inner-outline.loss {
+  background-color: lightcoral;
+}
+
+.duel--inner-outline.draw {
+  background-color: #ffd45a;
+}
+
+.duel--inner-outline .expand-duel {
   height: 20px;
 }
 
-.duel .expand-duel .fa-caret-down {
+.duel--inner-outline .expand-duel .fa-caret-down {
   color: white;
 }
 
-.duel .expand-duel--expanded .fa-caret-down {
+.duel--inner-outline .expand-duel--expanded .fa-caret-down {
   transform: rotateZ(180deg);
   transition: all 0.2s;
 }
 
-.duel .wiz-id {
+.duel--inner-outline .wiz-id {
   position: absolute;
   top: 10px;
   width: 100px;
@@ -87,29 +120,29 @@ input {
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id {
+  .duel--inner-outline .wiz-id {
     font-size: 1rem;
     z-index: 0;
   }
 }
 
-.duel .wiz-id--wiz1 {
+.duel--inner-outline--wiz1 {
   left: 10px;
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id--wiz1 {
+  .duel--inner-outline--wiz1 {
     left: initial;
     right: -75px;
   }
 }
 
-.duel .wiz-id--wiz2 {
+.duel--inner-outline--wiz2 {
   right: 10px;
 }
 
 @media (min-width: 768px) {
-  .duel .wiz-id--wiz2 {
+  .duel--inner-outline--wiz2 {
     right: initial;
     left: -75px;
   }

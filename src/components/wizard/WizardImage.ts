@@ -8,6 +8,8 @@ export default class WizardImageComponent extends Vue {
     public affinity!: number;
     @Prop()
     public id!: number;
+    @Prop()
+    public loading!: boolean;
 
     constructor() {
         super();

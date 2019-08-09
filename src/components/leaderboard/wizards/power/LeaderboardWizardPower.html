@@ -1,0 +1,22 @@
+<div class="leaderboard-wizard-power">
+    <table>
+        <thead>
+            <tr class="text-left">
+                <th class="pr-3"><u>Power</u></th>
+                <th class="pr-3"><u>Id</u></th>
+                <th><u>Owner</u></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-left" v-for="wizard in wizards">
+                <td class="pr-3">{{ formatWizardPower(wizard.power) }}</td>
+                <td class="pr-3">
+                    <router-link class="text-white" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
+                </td>
+                <td class="td-owner text-truncate">
+                    <router-link class="text-white" :to="'/players/'+wizard.owner">{{ wizard.owner }}</router-link>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

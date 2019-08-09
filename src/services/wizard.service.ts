@@ -4,6 +4,7 @@ import ApiResponse from '@/shared/models/ApiResponse';
 import Duel from '@/shared/models/Duel';
 import Player from '@/shared/models/Player';
 import * as qs from 'qs';
+import { LeaderboardCategory } from '@/shared/models/LeaderboardCategory';
 
 const baseUrl = 'https://api2.moonfarm.co/api/cheezewizard/';
 
@@ -53,6 +54,13 @@ export default class WizardService {
     public async getPlayer(address: string): Promise<ApiResponse<Player>> {
         // tslint:disable-next-line:max-line-length
         return await axios.get(`${ baseUrl }players/${ address }`).then((response: AxiosResponse<ApiResponse<Player>>) => {
+            return response.data;
+        });
+    }
+
+    public async getTopPlayers(category: LeaderboardCategory, count: number): Promise<ApiResponse<Player[]>> {
+        // tslint:disable-next-line:max-line-length
+        return await axios.get(`${ baseUrl }players/top/${ LeaderboardCategory[category] }/${ count }`).then((response: AxiosResponse<ApiResponse<Player[]>>) => {
             return response.data;
         });
     }

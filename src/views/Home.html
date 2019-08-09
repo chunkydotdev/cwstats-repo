@@ -5,44 +5,49 @@
         </div>
         <div class="d-flex justify-content-center">
             <div class="searchinput input-group mb-3">
+                <div class="input-group-prepend rounded-0">
+                    <select v-model="searchCategory" class="custom-select border-dark">
+                        <option :key="category" v-for="category in searchCategories">{{ category }}</option>
+                    </select>
+                </div>
                 <input
-                    v-model="wizardId"
-                    @keyup.enter="lookupWizardById()"
-                    type="number"
+                    v-model="searchTerm"
+                    @keyup.enter="lookup()"
+                    type="text"
                     class="form-control color-black"
-                    placeholder="Id..."
+                    :placeholder="placeholder"
                     aria-label="Lookup a wizard by id"
                     aria-describedby="home-title"
                 />
                 <div class="input-group-append">
-                    <button class="btn btn-outline border-black" type="button" @click="lookupWizardById()">Go</button>
+                    <button class="btn btn-outline border-black" type="button" @click="lookup">Go</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="high-scores pb-5 w-100">
-        <h1 class="text-center">Top 100</h1>
+        <h1 class="text-center mb-4">Top 100</h1>
+        <div class="d-flex flex-column">
+            <div class="d-flex justify-content-center mb-4">
+                <button class="btn-cw m-1" :class="{'active': isWizardsActive}" @click="leaderboardCategory = 'wizards'">Wizards</button>
+                <button class="btn-cw m-1" :class="{'active': isPlayersActive}" @click="leaderboardCategory = 'players'">Players</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button class="btn-cw m-1" :class="{'active': isPowerActive}" @click="leaderboardSubCategory = 'power'">Power</button>
+                <!--<button class="btn-cw m-1" :class="{'active': isWinsActive}" @click="leaderboardSubCategory = 'wins'">Wins</button>-->
+                <button v-if="isPlayersActive" class="btn-cw m-1" :class="{'active': isWizardsCountActive}" @click="leaderboardSubCategory = 'wizardscount'"
+                    >Wizards</button
+                >
+            </div>
+        </div>
         <div class="d-flex flex-column align-items-center">
-            <table>
-                <thead>
-                    <tr class="text-left">
-                        <th class="pr-3"><u>Power</u></th>
-                        <th class="pr-3"><u>Id</u></th>
-                        <th><u>Owner</u></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-left" v-for="wizard in topWizards">
-                        <td class="pr-3">{{ formatWizardPower(wizard.power) }}</td>
-                        <td class="pr-3">
-                            <router-link class="text-white" :to="'/wizards/'+wizard.id">{{ wizard.id }}</router-link>
-                        </td>
-                        <td class="td-owner text-truncate">
-                            <router-link class="text-white" :to="'/players/'+wizard.owner">{{ wizard.owner }}</router-link>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <LeaderboardWizardPowerComponent v-if="isWizardsActive && isPowerActive" :wizards="topWizards" :loading="false"></LeaderboardWizardPowerComponent>
+            <LeaderboardPlayerPowerComponent v-if="isPlayersActive && isPowerActive" :players="topPlayers" :loading="false"></LeaderboardPlayerPowerComponent>
+            <LeaderboardPlayerWizardsComponent
+                v-if="isPlayersActive && isWizardsCountActive"
+                :players="topPlayers"
+                :loading="false"
+            ></LeaderboardPlayerWizardsComponent>
         </div>
     </div>
 </div>

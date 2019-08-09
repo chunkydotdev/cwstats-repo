@@ -9,15 +9,15 @@
                     </div>
                 </div>
             </div>
-            <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz1Id }}</div>
+            <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">
+                <router-link class="text-white" :to="'/wizards/'+duel.wiz1Id">
+                    {{ duel.wiz1Id }}
+                </router-link>
+            </div>
         </div>
         <div class="d-flex align-items-center justify-content-center flex-shrink-2 w-100 flex-wrap px-2">
             <div class="w-100 d-flex flex-nowrap justify-content-center py-3">
                 VS
-            </div>
-            <div class="w-100 d-flex" :class="{'justify-content-center': wiz1pts === wiz2pts, 'justify-content-end': wiz1pts < wiz2pts}">
-                <div v-if="wiz1pts !== wiz2pts" class="p-2 rounded bg-success border border-dark">WIN</div>
-                <div v-else class="p-2 rounded bg-warning border border-dark">DRAW</div>
             </div>
         </div>
         <div class="position-relative">
@@ -29,7 +29,11 @@
                     </div>
                 </div>
             </div>
-            <div class="wiz-id wiz-id--wiz2 text-left bg-dark text-white px-3 py-2 rounded">#{{ duel.wiz2Id }}</div>
+            <div class="wiz-id wiz-id--wiz2 text-left bg-dark text-white px-3 py-2 rounded">
+                <router-link class="text-white" :to="'/wizards/'+duel.wiz2Id">
+                    {{ duel.wiz2Id }}
+                </router-link>
+            </div>
         </div>
     </div>
     <div class="d-flex flex-nowrap mt-3">
@@ -46,7 +50,7 @@
                         <td><u>Pwr+/-</u></td>
                     </tr>
                     <tr>
-                        <td>{{ duel.wiz1PowerChange }}</td>
+                        <td>{{ readablePower(duel.wiz1PowerChange) }}</td>
                     </tr>
                 </table>
             </div>
@@ -81,7 +85,7 @@
                         <td><u>Pwr+/-</u></td>
                     </tr>
                     <tr>
-                        <td>{{ duel.wiz2PowerChange }}</td>
+                        <td>{{ readablePower(duel.wiz2PowerChange) }}</td>
                     </tr>
                 </table>
             </div>

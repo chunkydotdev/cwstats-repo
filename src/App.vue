@@ -1,29 +1,4 @@
-<template>
-  <div id="app">
-    <nav class="navbar navbar-dark bg-dark">
-      <router-link class="navbar-brand" to="/">CWSTATS</router-link>
-      <div v-if="currentRoute !== 'home'" class="form-inline d-flex flex-nowrap">
-        <input
-          v-model="wizardId"
-          @keyup.enter="lookupWizardById()"
-          type="number"
-          class="form-control color-black"
-          placeholder="Id..."
-          aria-label="Lookup a wizard by id"
-          aria-describedby="home-title"
-        />
-        <div class="input-group-append">
-          <button class="btn border-black text-warning" type="button" @click="lookupWizardById()">Go</button>
-        </div>
-      </div>
-    </nav>
-    <div
-      :class="{'container': currentRoute !== 'home', 'container-fluid': currentRoute === 'home'}"
-    >
-      <router-view />
-    </div>
-  </div>
-</template>
+<template src="./App.html"></template>
 <script src="./App.ts" lang="ts"></script>
 <style lang="scss">
 @import "./shared/scss/bootstrap-ext.scss";

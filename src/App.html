@@ -1,0 +1,29 @@
+<div id="app">
+  <nav class="navbar navbar-dark bg-dark">
+    <router-link class="navbar-brand" to="/">CWSTATS</router-link>
+    <div v-if="currentRoute !== 'home'" class="form-inline d-flex flex-nowrap">
+    <div class="input-group-prepend rounded-0">
+        <select v-model="searchCategory" class="custom-select custom-select--nav border-dark">
+          <option :key="category" v-for="category in searchCategories">{{ category }}</option>
+        </select>
+      </div>
+      <input
+        v-model="searchTerm"
+        @keyup.enter="lookup()"
+        type="text"
+        class="form-control color-black"
+        placeholder="Id..."
+        aria-label="Lookup a wizard by id"
+        aria-describedby="home-title"
+      />
+      <div class="input-group-append">
+        <button class="btn border-black text-warning" type="button" @click="lookup()">Go</button>
+      </div>
+    </div>
+  </nav>
+  <div
+    :class="{'container': currentRoute !== 'home', 'container-fluid': currentRoute === 'home'}"
+  >
+    <router-view />
+  </div>
+</div>
