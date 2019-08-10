@@ -8,6 +8,16 @@
   position: relative;
 }
 
+.spinner--yellow-black {
+  border-color: #fff032 !important;
+  border-bottom: transparent !important;
+}
+
+.spinner--yellow-black:after {
+  border-color: black !important;
+  border-bottom: transparent !important;
+}
+
 .spinner:after {
   content: '';
   position: absolute;

@@ -26,6 +26,7 @@ export default class Home extends Vue {
     public placeholder: string;
     public leaderboardCategory: string;
     public leaderboardSubCategory: string;
+    public loadingLeaderboards: boolean;
 
     constructor() {
         super();
@@ -39,6 +40,7 @@ export default class Home extends Vue {
         this.searchCategories = ['wizard', 'player'];
         this.searchCategory = this.searchCategories[0];
         this.placeholder = 'Id...';
+        this.loadingLeaderboards = true;
 
         // tslint:disable-next-line:max-line-length
         this.service.getTopWizardsByPower(100).then((response: ApiResponse<Wizard[]>) => this.setTopWizards(response.result));
@@ -71,12 +73,14 @@ export default class Home extends Vue {
             if (this.leaderboardSubCategory === 'wizardscount') {
                 this.leaderboardSubCategory = 'power';
             } else if (this.leaderboardSubCategory === 'power') {
+                this.loadingLeaderboards = true;
                 // tslint:disable-next-line:max-line-length
                 this.service.getTopWizardsByPower(100).then((response: ApiResponse<Wizard[]>) => this.setTopWizards(response.result));
             } else if (this.leaderboardSubCategory === 'wins') {
                 // todo
             }
         } else if (this.leaderboardCategory === 'players') {
+            this.loadingLeaderboards = true;
             if (this.leaderboardSubCategory === 'wizardscount') {
                 // tslint:disable-next-line:max-line-length
                 this.service.getTopPlayers(LeaderboardCategory.Wizards, 100).then((response: ApiResponse<Player[]>) => this.setTopPlayers(response.result));
@@ -100,6 +104,7 @@ export default class Home extends Vue {
     }
 
     public setTopWizards(wizards: Wizard[]) {
+        this.loadingLeaderboards = false;
         this.topWizards = wizards.sort((w1, w2) => {
             const p1 = Number.parseInt(w1.power, 10);
             const p2 = Number.parseInt(w2.power, 10);
@@ -108,7 +113,13 @@ export default class Home extends Vue {
     }
 
     public setTopPlayers(players: Player[]) {
+        this.loadingLeaderboards = false;
         this.topPlayers = players;
+        if (this.leaderboardSubCategory === 'power') {
+            this.topPlayers.sort((a: Player, b: Player) => b.wizardPowerSum - a.wizardPowerSum);
+        } else if (this.leaderboardSubCategory === 'wizards') {
+            this.topPlayers.sort((a: Player, b: Player) => a.wizardCount - b.wizardCount);
+        }
     }
 
     public lookup() {

@@ -2,6 +2,7 @@
 <script src="./App.ts" lang="ts"></script>
 <style lang="scss">
 @import "./shared/scss/bootstrap-ext.scss";
+@import "./shared/scss/colors.scss";
 #app {
   font-family: exocet, cursive;
   text-align: center;
@@ -13,5 +14,19 @@ body {
 @font-face {
   font-family: "Exocet";
   src: url("./assets/exocet.ttf");
+}
+
+button {
+  &:active,
+  &:focus {
+    outline-color: $color-yellow-primary;
+  }
+}
+
+a {
+  &:active,
+  &:focus {
+    outline-color: $color-yellow-05;
+  }
 }
 </style>

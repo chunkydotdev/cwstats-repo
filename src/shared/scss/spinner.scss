@@ -1,3 +1,5 @@
+@import './colors.scss';
+
 .spinner {
     width: 40px;
     height: 40px;
@@ -6,6 +8,16 @@
     border-bottom-color: transparent;
     animation: spin 1s infinite linear;
     position: relative;
+
+    &--yellow-black {
+        border-color: $color-yellow-primary !important;
+        border-bottom: transparent !important;
+
+        &:after {
+            border-color: black !important;
+            border-bottom: transparent !important;
+        }
+    }
 
     &:after {
         content: '';
