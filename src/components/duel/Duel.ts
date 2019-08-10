@@ -5,13 +5,15 @@ import Duel from '@/shared/models/Duel';
 import WizardService from '@/services/wizard.service';
 import ApiResponse from '@/shared/models/ApiResponse';
 import DuelDataWizardComponent from './wizard/DuelDataWizard';
+import DuelDataPlayerComponent from './player/DuelDataPlayer';
 
 @Component({
     components: {
         DuelDataWizardComponent,
+        DuelDataPlayerComponent,
     },
 })
-export default class DuelComponents extends Vue {
+export default class DuelComponent extends Vue {
     @Prop()
     public duel!: Duel;
 
@@ -21,13 +23,15 @@ export default class DuelComponents extends Vue {
     public wizard2: Wizard;
     public wizardService: WizardService;
     public expanded: boolean;
+    public category: string;
 
     constructor() {
         super();
 
         this.expanded = false;
+        this.category = 'wizards';
         // tslint:disable-next-line:max-line-length
-        this.wizard2 = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [2, 2, 2, 2, 2], commonMove: 2, wins: 0, losses: 0, draws: 0, duelCount: 0 };
+        this.wizard2 = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMove: 0, wins: 0, losses: 0, draws: 0, duelCount: 0 };
         this.wizardService = new WizardService();
 
         if (this.wizard.id === this.duel.wiz1Id) {
@@ -37,6 +41,21 @@ export default class DuelComponents extends Vue {
             // tslint:disable-next-line:max-line-length
             this.wizardService.getWizardById(this.duel.wiz1Id).then((response: ApiResponse<Wizard>) => this.setWizard2(response.result));
         }
+    }
+
+    public get isWizardsActive(): boolean {
+        return this.category === 'wizards';
+    }
+
+    public get isPlayersActive(): boolean {
+        return this.category === 'players';
+    }
+
+    public get getWizardsSelectionIcon(): string {
+        if (this.isWizardsActive) {
+            return '../../assets/book-dark.svg';
+        }
+        return '../../assets/book-color.svg';
     }
 
     public setWizard2(wizard: Wizard) {

@@ -60,7 +60,7 @@
                         <td>
                             <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell"></SpellComponent>
                         </td>
-                        <td class="px-2 text-nowrap">Spell {{ index }}</td>
+                        <td class="px-3 text-nowrap">Spell {{ index }}</td>
                         <td>
                             <SpellComponent :win="isSpellWin(index, 2)" :critical="isSpellCritical(index, 2)" :affinity="duel.moveSet2[index]"></SpellComponent>
                         </td>
@@ -68,8 +68,8 @@
                 </table>
 
                 <div class="d-flex w-100 justify-content-between flex-nowrap">
-                    <div>Pts: {{ wiz1pts }}</div>
-                    <div>Pts: {{ wiz2pts }}</div>
+                    <div>HITS: {{ wiz1pts }}</div>
+                    <div>HITS: {{ wiz2pts }}</div>
                 </div>
             </div>
 

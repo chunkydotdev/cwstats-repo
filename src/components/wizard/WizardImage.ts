@@ -10,6 +10,8 @@ export default class WizardImageComponent extends Vue {
     public id!: number;
     @Prop()
     public loading!: boolean;
+    @Prop()
+    public forSale!: boolean;
 
     constructor() {
         super();

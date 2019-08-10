@@ -1,6 +1,6 @@
 <div class="wizardstats pt-5 d-flex flex-wrap flex-md-nowrap">
     <div class="d-flex flex-column">
-        <WizardImageComponent :loading="loadingWizard" :id="getWizardId" :affinity="getWizardAffinity"></WizardImageComponent>
+        <WizardImageComponent :forSale="isForSale" :loading="loadingWizard" :id="getWizardId" :affinity="getWizardAffinity"></WizardImageComponent>
         <div class="d-flex flex-column mt-3">
             <div class="d-flex justify-content-between mb-2">
                 <div>Id:</div><div>{{ getWizardId }}</div>
@@ -40,11 +40,13 @@
                     <div class="mr-2" v-for="spell in wizard.commonMoveSet">
                         <SpellComponent :color="true" :affinity="spell"></SpellComponent>
                     </div>
+                    <div v-if="wizard.commonMoveSet.length === 0">N/A</div>
                 </div>
             </div>
             <div class="w-100 d-flex flex-wrap text-left">
                 <div class="mr-2 w-100">Most used spell</div>
-                <SpellComponent :color="true" :affinity="wizard.commonMove"></SpellComponent>
+                <SpellComponent v-if="wizard.commonMove > 0" :color="true" :affinity="wizard.commonMove"></SpellComponent>
+                <div v-else>N/A</div>
             </div>
         </div>
         <div class="w-100 mt-5">

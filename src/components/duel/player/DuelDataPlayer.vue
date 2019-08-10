@@ -1,3 +1,3 @@
-<template src="./DuelDataWizard.html"></template>
-<style src="./DuelDataWizard.scss" lang="scss"></style>
-<script src="./DuelDataWizard.ts" lang="ts"></script>
+<template src="./DuelDataPlayer.html"></template>
+<style src="./DuelDataPlayer.scss" lang="scss"></style>
+<script src="./DuelDataPlayer.ts" lang="ts"></script>

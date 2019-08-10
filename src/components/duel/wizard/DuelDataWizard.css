@@ -8,6 +8,18 @@
   color: #fff24d !important;
 }
 
+.custom-select {
+  background-color: #fff032;
+  color: black;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.custom-select--nav {
+  border-radius: 0.25rem !important;
+  background-color: black !important;
+  color: #fff032;
+}
+
 .w-33 {
   width: 33% !important;
 }
@@ -43,6 +55,16 @@ input {
   position: relative;
 }
 
+.spinner--yellow-black {
+  border-color: #fff032 !important;
+  border-bottom: transparent !important;
+}
+
+.spinner--yellow-black:after {
+  border-color: black !important;
+  border-bottom: transparent !important;
+}
+
 .spinner:after {
   content: '';
   position: absolute;
@@ -66,8 +88,14 @@ input {
 }
 
 .duel-data-wizard {
-  max-height: 135px;
   transition: all 0.2s;
+  max-height: 90px;
+}
+
+@media (min-width: 768px) {
+  .duel-data-wizard {
+    max-height: 135px;
+  }
 }
 
 .duel-data-wizard--expanded {
@@ -79,13 +107,12 @@ input {
   top: 10px;
   width: 100px;
   font-size: 0.7rem;
-  z-index: -1;
+  z-index: 0;
 }
 
 @media (min-width: 768px) {
   .duel-data-wizard .wiz-id {
     font-size: 1rem;
-    z-index: 0;
   }
 }
 
@@ -115,6 +142,7 @@ input {
   width: 50px;
   height: 50px;
   border-width: 5px !important;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {

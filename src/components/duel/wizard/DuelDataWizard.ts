@@ -10,7 +10,7 @@ import SpellComponent from '../../spell/Spell';
         SpellComponent,
     },
 })
-export default class DuelDataWizardComponents extends Vue {
+export default class DuelDataWizardComponent extends Vue {
     @Prop()
     public duel!: Duel;
 
@@ -108,9 +108,9 @@ export default class DuelDataWizardComponents extends Vue {
 
     public isSpellCritical(index: number, wizard: number): boolean {
         if (wizard === 1) {
-            return this.duel.moveSet1[index] + 1 === this.wizard.affinity;
+            return this.duel.moveSet1[index] === this.wizard.affinity;
         } else {
-            return this.duel.moveSet2[index] + 1 === this.wizard2.affinity;
+            return this.duel.moveSet2[index] === this.wizard2.affinity;
         }
     }
 
