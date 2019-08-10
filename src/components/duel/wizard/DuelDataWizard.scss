@@ -46,7 +46,6 @@
         width: 50px;
         height: 50px;
         border-width: 5px !important;
-        z-index: 1;
 
         @include media-breakpoint-up(md) {
             width: 100px;
@@ -64,6 +63,7 @@
         }
 
         &--sizing {
+            z-index: 1;
             position: absolute;
             top: -10px;
             left: -2.5px;

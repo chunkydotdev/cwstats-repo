@@ -13,16 +13,21 @@ import Player from '@/shared/models/Player';
 })
 export default class DuelDataPlayerComponent extends Vue {
     @Prop()
+    public expanded!: boolean;
+    @Prop()
     public duel!: Duel;
-
     @Prop()
     public player1!: Player;
-
     @Prop()
     public player2!: Player;
 
     constructor() {
         super();
+    }
+
+    public readablePower(power: number) {
+        const power1 = power.toString().substring(0, power.toString().length - 12);
+        return power1;
     }
 
 }

@@ -4,4 +4,44 @@
 @import '../../../../shared/scss/spinner.scss';
 
 .leaderboard-wizard-power {
+    .load-opensea {
+        top: 0px;
+
+        .dot {
+            right: -5px;
+            bottom: 7px;
+            height: 2px;
+            width: 2px;
+            background-color: white;
+
+            &--1 {
+                animation: dots 1s infinite 0s linear;
+            }
+
+            &--2 {
+                right: -10px;
+                animation: dots 1s infinite 0.15s linear;
+            }
+
+            &--3 {
+                right: -15px;
+                animation: dots 1s infinite 0.3s linear;
+            }
+        }
+    }
+}
+
+@keyframes dots {
+    0% {
+        opacity: 0;
+    }
+    49% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
 }

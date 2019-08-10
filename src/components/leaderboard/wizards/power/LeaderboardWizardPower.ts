@@ -14,10 +14,12 @@ export default class LeaderboardWizardPowerComponent extends Vue {
 
     public openSeaWizards: OpenSeaAsset[];
     public openSeaService: OpenSeaService;
+    public fetchingOpensea: boolean;
     public wizardAssets: LeaderboardWizard[];
 
     constructor() {
         super();
+        this.fetchingOpensea = true;
         this.openSeaWizards = [];
         this.openSeaService = new OpenSeaService();
         this.wizardAssets = [];
@@ -42,6 +44,7 @@ export default class LeaderboardWizardPowerComponent extends Vue {
                 this.wizardAssets.splice(wAssetIndex, 1, wa);
             }
         });
+        this.fetchingOpensea = false;
     }
 
 }

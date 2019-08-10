@@ -4,17 +4,25 @@
 @import '../../../shared/scss/bootstrap-ext.scss';
 @import '../../../shared/scss/spinner.scss';
 
-.duel-data-players {
-}
+.duel-data-player {
+    transition: all 0.2s;
+    max-height: 110px;
 
-.win {
-    background-color: lightgreen;
-}
+    &--expanded {
+        max-height: 550px;
+    }
 
-.draw {
-    background-color: #ffc107;
-}
+    &__address {
+        width: 50vw;
+        max-width: 300px;
 
-.loss {
-    background-color: lightcoral;
+        @include media-breakpoint-up(lg) {
+            width: auto;
+            max-width: initial;
+        }
+    }
+
+    &__stats {
+        max-width: 300px;
+    }
 }

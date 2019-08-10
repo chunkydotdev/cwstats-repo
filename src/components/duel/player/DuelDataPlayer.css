@@ -65,6 +65,16 @@ input {
   border-bottom: transparent !important;
 }
 
+.spinner--black-yellow {
+  border-color: black !important;
+  border-bottom: transparent !important;
+}
+
+.spinner--black-yellow:after {
+  border-color: #fff032 !important;
+  border-bottom: transparent !important;
+}
+
 .spinner:after {
   content: '';
   position: absolute;
@@ -87,14 +97,27 @@ input {
   }
 }
 
-.win {
-  background-color: lightgreen;
+.duel-data-player {
+  transition: all 0.2s;
+  max-height: 110px;
 }
 
-.draw {
-  background-color: #ffc107;
+.duel-data-player--expanded {
+  max-height: 550px;
 }
 
-.loss {
-  background-color: lightcoral;
+.duel-data-player__address {
+  width: 50vw;
+  max-width: 300px;
+}
+
+@media (min-width: 992px) {
+  .duel-data-player__address {
+    width: auto;
+    max-width: initial;
+  }
+}
+
+.duel-data-player__stats {
+  max-width: 300px;
 }

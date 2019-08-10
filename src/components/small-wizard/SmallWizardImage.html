@@ -15,6 +15,16 @@
         >
             {{ getWizardPower }}
         </div>
-        <div class="small-wizard-id position-absolute bg-white border-bottom border-left border-dark px-2"> #{{ wizard.id }} </div>
+        <div class="small-wizard-id position-absolute bg-white border-bottom border-left border-dark px-2">
+            <router-link :key="wizard.id" class="text-dark" :to="'/wizards/'+wizard.id"> #{{ wizard.id }} </router-link>
+        </div>
+        <div v-if="forSale" class="small-wizard-image__for-sale position-absolute bg-white border-bottom border-right border-dark px-1">
+            <a
+                target="_blank"
+                :href="'https://opensea.io/assets/0x2f4bdafb22bd92aa7b7552d270376de8edccbc1e/'+wizard.id+'?ref=0x1281a133b59788b9e3eb4f7603babe538fb60584'"
+            >
+                <img src="../../assets/opensea-logomark-flat-colored-blue.svg" height="20" />
+            </a>
+        </div>
     </div>
 </div>

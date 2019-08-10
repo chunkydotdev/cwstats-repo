@@ -65,30 +65,46 @@
             <h3 class="text-left"><u>Wizards</u></h3>
             <div class="w-100">Basic</div>
             <div class="w-100 d-flex flex-wrap">
-                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in basicWizards">
-                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
-                </router-link>
+                <SmallWizardImageComponent
+                    class="mr-2 mb-2"
+                    :key="asset.wizard.id"
+                    :forSale="asset.forSale"
+                    :wizard="asset.wizard"
+                    v-for="asset in basicWizards"
+                ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="basicWizards.length === 0">N/A</div>
             </div>
             <div class="w-100">Fire</div>
             <div class="w-100 d-flex flex-wrap">
-                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in fireWizards">
-                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
-                </router-link>
+                <SmallWizardImageComponent
+                    class="mr-2 mb-2"
+                    :key="asset.wizard.id"
+                    :forSale="asset.forSale"
+                    :wizard="asset.wizard"
+                    v-for="asset in fireWizards"
+                ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="fireWizards.length === 0">N/A</div>
             </div>
             <div class="w-100">Water</div>
             <div class="w-100 d-flex flex-wrap">
-                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in waterWizards">
-                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
-                </router-link>
+                <SmallWizardImageComponent
+                    class="mr-2 mb-2"
+                    :key="asset.wizard.id"
+                    :forSale="asset.forSale"
+                    :wizard="asset.wizard"
+                    v-for="asset in waterWizards"
+                ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="waterWizards.length === 0">N/A</div>
             </div>
             <div class="w-100">Wind</div>
             <div class="w-100 d-flex flex-wrap">
-                <router-link :key="wizard.id" class="mr-2 mb-2" :to="'/wizards/'+wizard.id" v-for="wizard in windWizards">
-                    <SmallWizardImageComponent :wizard="wizard"></SmallWizardImageComponent>
-                </router-link>
+                <SmallWizardImageComponent
+                    class="mr-2 mb-2"
+                    :key="asset.wizard.id"
+                    :forSale="asset.forSale"
+                    :wizard="asset.wizard"
+                    v-for="asset in windWizards"
+                ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="windWizards.length === 0">N/A</div>
             </div>
         </div>

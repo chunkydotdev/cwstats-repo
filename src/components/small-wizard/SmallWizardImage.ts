@@ -6,6 +6,8 @@ import router from '@/router';
 export default class SmallWizardImageComponent extends Vue {
     @Prop()
     public wizard!: Wizard;
+    @Prop()
+    public forSale!: boolean;
 
     constructor() {
         super();

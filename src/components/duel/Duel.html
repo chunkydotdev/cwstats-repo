@@ -1,19 +1,20 @@
 <div class="duel d-flex flex-column" :class="{'win': isWin, 'loss': isLoss, 'draw': isDraw}">
     <div class="duel--inner-outline p-3">
         <div v-if="expanded" class="d-flex justify-content-end mr-n3 mt-n3 mb-3">
-            <div class="py-2 bg-white border-bottom border-left border-dark">
+            <div class="py-2 bg-white border-bottom border-left border-dark d-flex flex-nowrap">
                 <button @click="category = 'wizards'" class="btn-cw">
                     <img v-if="isWizardsActive" src="../../assets/book-color.svg" width="30" height="30" />
                     <img v-else src="../../assets/book-dark.svg" width="30" height="30" />
                 </button>
-                <button @click="category = 'players'" class="btn-cw">
+                <button v-if="!loadingPlayers" @click="category = 'players'" class="btn-cw">
                     <img v-if="isPlayersActive" src="../../assets/cheeze-head-color.svg" width="30" height="30" />
                     <img v-else src="../../assets/cheeze-head.svg" width="30" height="30" />
                 </button>
+                <div v-else class="spinner spinner--small mr-3 mt-1 ml-2"></div>
             </div>
         </div>
         <DuelDataWizardComponent v-if="category === 'wizards'" :expanded="expanded" :wizard="wizard" :wizard2="wizard2" :duel="duel"></DuelDataWizardComponent>
-        <DuelDataPlayerComponent></DuelDataPlayerComponent>
+        <DuelDataPlayerComponent v-else :duel="duel" :player1="player1" :player2="player2" :expanded="expanded"></DuelDataPlayerComponent>
         <button
             class="expand-duel border-0 mb-n3 d-flex bg-dark align-items-center justify-content-center"
             :class="{'expand-duel--expanded': expanded}"
