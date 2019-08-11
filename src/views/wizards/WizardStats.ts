@@ -97,6 +97,10 @@ export default class WizardStatsComponent extends Vue {
         return this.wizard.affinity;
     }
 
+    public get wizardBattles(): number {
+        return Math.max(this.wizard.wins + this.wizard.losses + this.wizard.draws, 1);
+    }
+
     public get getWizardId(): number {
         return this.wizard.id;
     }

@@ -57,6 +57,10 @@ export default class PlayerStatsComponent extends Vue {
         this.service.getWizardsByOwner(this.playerAddress).then((response: ApiResponse<Wizard[]>) => this.setWizards(response.result));
     }
 
+    public get playerBattles(): number {
+        return Math.max(this.player.wins + this.player.draws + this.player.losses, 1);
+    }
+
     public setPlayer(player: Player) {
         this.player = player;
     }
@@ -93,7 +97,7 @@ export default class PlayerStatsComponent extends Vue {
         }
         assetBatches.forEach((assets: number[], index: number) => {
             // tslint:disable-next-line:max-line-length
-            this.openSeaService.getWizards(assets, 200, index).then((response: any) => this.addOpenSeaAssets(response.assets));
+            this.openSeaService.getWizards(assets, 200, index).then((response: ApiResponse<OpenSeaAsset[]>) => this.addOpenSeaAssets(response.result));
         });
     }
 

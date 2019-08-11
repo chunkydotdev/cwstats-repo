@@ -4,9 +4,18 @@
 @import "./shared/scss/bootstrap-ext.scss";
 @import "./shared/scss/colors.scss";
 #app {
-  font-family: exocet, cursive;
+  font-family: "code-saver";
   text-align: center;
   color: black;
+
+  button,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: exocet;
+  }
 }
 body {
   background-color: rgb(255, 242, 77);
@@ -14,6 +23,10 @@ body {
 @font-face {
   font-family: "Exocet";
   src: url("./assets/exocet.ttf");
+}
+@font-face {
+  font-family: "code-saver";
+  src: url("./assets/CodeSaver-Regular.otf") format("opentype");
 }
 
 button {

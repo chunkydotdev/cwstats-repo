@@ -1,4 +1,4 @@
-<div class="playerstats d-flex flex-nowrap flex-column flex-md-row pt-5">
+<div class="playerstats d-flex flex-nowrap flex-column flex-md-row py-5">
     <div class="playerstats--info d-flex flex-column">
         <PlayerImageComponent></PlayerImageComponent>
         <div class="text-truncate mt-3">
@@ -8,15 +8,15 @@
         </div>
         <div class="d-flex justify-content-between mt-3">
             <div>Wins</div>
-            <div>{{ player.wins }}</div>
+            <div>{{ player.wins }} ({{ (player.wins / playerBattles) * 100 }}%)</div>
         </div>
         <div class="d-flex justify-content-between mt-3">
             <div>Losses</div>
-            <div>{{ player.losses }}</div>
+            <div>{{ player.losses }} ({{ (player.losses / playerBattles) * 100 }}%)</div>
         </div>
         <div class="d-flex justify-content-between mt-3">
             <div>Draws</div>
-            <div>{{ player.draws }}</div>
+            <div>{{ player.draws }} ({{ (player.draws / playerBattles) * 100 }}%)</div>
         </div>
     </div>
     <div class="w-100 d-flex flex-column ml-0 ml-md-5 text-left">
@@ -63,7 +63,7 @@
         </div>
         <div class="w-100 mt-5 mt-md-0">
             <h3 class="text-left"><u>Wizards</u></h3>
-            <div class="w-100">Basic</div>
+            <h4>BASIC</h4>
             <div class="w-100 d-flex flex-wrap">
                 <SmallWizardImageComponent
                     class="mr-2 mb-2"
@@ -74,7 +74,7 @@
                 ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="basicWizards.length === 0">N/A</div>
             </div>
-            <div class="w-100">Fire</div>
+            <h4>FIRE</h4>
             <div class="w-100 d-flex flex-wrap">
                 <SmallWizardImageComponent
                     class="mr-2 mb-2"
@@ -85,7 +85,7 @@
                 ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="fireWizards.length === 0">N/A</div>
             </div>
-            <div class="w-100">Water</div>
+            <h4>WATER</h4>
             <div class="w-100 d-flex flex-wrap">
                 <SmallWizardImageComponent
                     class="mr-2 mb-2"
@@ -96,7 +96,7 @@
                 ></SmallWizardImageComponent>
                 <div class="mr-2 mb-2" v-if="waterWizards.length === 0">N/A</div>
             </div>
-            <div class="w-100">Wind</div>
+            <h4>WIND</h4>
             <div class="w-100 d-flex flex-wrap">
                 <SmallWizardImageComponent
                     class="mr-2 mb-2"

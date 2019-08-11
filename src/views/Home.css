@@ -95,19 +95,3 @@ input {
 .home table tr td {
   font-size: 14px;
 }
-
-.btn-cw.active {
-  position: relative;
-}
-
-.btn-cw.active:after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -15px;
-  height: 25px;
-  content: '';
-  background: url("../assets/udders-color.svg") no-repeat;
-  background-size: 25px;
-  background-position: top center;
-}

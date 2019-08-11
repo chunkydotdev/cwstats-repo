@@ -1,4 +1,4 @@
-<div class="wizardstats pt-5 d-flex flex-wrap flex-md-nowrap">
+<div class="wizardstats py-5 d-flex flex-wrap flex-md-nowrap">
     <div class="d-flex flex-column">
         <WizardImageComponent :forSale="isForSale" :loading="loadingWizard" :id="getWizardId" :affinity="getWizardAffinity"></WizardImageComponent>
         <div class="d-flex flex-column mt-3">
@@ -21,13 +21,13 @@
                 <div>Power:</div><div>{{ getWizardPower }}</div>
             </div>
             <div class="d-flex justify-content-between mb-2">
-                <div>Wins:</div><div>{{ wizard.wins }}</div>
+                <div>Wins:</div><div>{{ wizard.wins }} ({{ (wizard.wins / wizardBattles) * 100 }}%)</div>
             </div>
             <div class="d-flex justify-content-between mb-2">
-                <div>Losses:</div><div>{{ wizard.losses }}</div>
+                <div>Losses:</div><div>{{ wizard.losses }} ({{ (wizard.losses / wizardBattles) * 100 }}%)</div>
             </div>
             <div class="d-flex justify-content-between mb-2">
-                <div>Draws:</div><div>{{ wizard.draws }}</div>
+                <div>Draws:</div><div>{{ wizard.draws }} ({{ (wizard.draws / wizardBattles) * 100 }}%)</div>
             </div>
         </div>
     </div>

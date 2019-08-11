@@ -1,7 +1,12 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import router from '@/router';
+import FooterComponent from './views/shared/footer/Footer';
 
-@Component({})
+@Component({
+    components: {
+        FooterComponent,
+    },
+})
 export default class App extends Vue {
     public searchTerm: string;
     public searchCategory: string;
