@@ -9,15 +9,6 @@
     border: 5px solid white;
     &--inner-outline {
         outline: 1px solid black;
-        &.win {
-            background-color: lightgreen;
-        }
-        &.loss {
-            background-color: lightcoral;
-        }
-        &.draw {
-            background-color: $color-yellow-04;
-        }
 
         .expand-duel {
             height: 20px;
@@ -39,13 +30,13 @@
 }
 
 .win {
-    background-color: lightgreen;
+    background-color: lighten(lightgreen, 10%);
 }
 
 .draw {
-    background-color: #ffc107;
+    background-color: $color-yellow-05;
 }
 
 .loss {
-    background-color: lightcoral;
+    background-color: lighten(lightcoral, 10%);
 }

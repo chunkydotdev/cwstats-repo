@@ -1,36 +1,34 @@
 import axios, { AxiosResponse } from 'axios';
 import * as qs from 'qs';
-import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
+import { OpenSeaAsset } from '@/shared/models/OpenSeaAsset';
+import ApiResponse from '@/shared/models/ApiResponse';
 
-const baseUrl = 'https://api.opensea.io/api/v1/';
-const cwContract = '0x2f4bdafb22bd92aa7b7552d270376de8edccbc1e';
+const baseUrl = 'https://api2.moonfarm.co/api/opensea/';
 
 export default class OpenSeaService {
 
     // tslint:disable-next-line:variable-name
-    public async getWizards(token_ids: number[], limit: number, offset: number): Promise<OpenSeaAsset[]> {
+    public async getWizards(wizardIds: number[], limit: number, offset: number): Promise<ApiResponse<OpenSeaAsset[]>> {
         // tslint:disable-next-line:max-line-length, limit: number, offset: number
         return await axios.get(
-            `${ baseUrl }assets/`, {
+            `${ baseUrl }wizards`, {
                 params: {
-                    token_ids,
+                    wizardIds,
                     limit,
                     offset,
-                    asset_contract_address: cwContract,
                 },
                 paramsSerializer: (params) => {
-                    return qs.stringify(params, { indices: false });
+                    return qs.stringify(params);
                 },
-            }).then((response: AxiosResponse<OpenSeaAsset[]>) => {
+            }).then((response: AxiosResponse<ApiResponse<OpenSeaAsset[]>>) => {
                 return response.data;
             });
     }
 
-    public async getWizard(id: number): Promise<OpenSeaAsset> {
+    public async getWizard(id: number): Promise<ApiResponse<OpenSeaAsset>> {
         // tslint:disable-next-line:max-line-length
-        return await axios.get(
-            `${ baseUrl }asset/${ cwContract }/${ id }/`).then((response: AxiosResponse<OpenSeaAsset>) => {
-                return response.data;
-            });
+        return await axios.get(`${ baseUrl }wizards/${ id }`).then((response: AxiosResponse<ApiResponse<OpenSeaAsset>>) => {
+            return response.data;
+        });
     }
 }

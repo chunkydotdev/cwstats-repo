@@ -16,7 +16,7 @@ import Player from '@/shared/models/Player';
 })
 export default class DuelComponent extends Vue {
     @Prop()
-    public duel!: Duel;
+    public rawDuel!: Duel;
 
     @Prop()
     public wizard!: Wizard;
@@ -51,13 +51,8 @@ export default class DuelComponent extends Vue {
         // tslint:disable-next-line:max-line-length
         this.wizardService.getPlayer(this.wizard.owner).then((response: ApiResponse<Player>) => this.setPlayer1(response.result));
 
-        if (this.wizard.id === this.duel.wiz1Id) {
-            // tslint:disable-next-line:max-line-length
-            this.wizardService.getWizardById(this.duel.wiz2Id).then((response: ApiResponse<Wizard>) => this.setWizard2(response.result));
-        } else {
-            // tslint:disable-next-line:max-line-length
-            this.wizardService.getWizardById(this.duel.wiz1Id).then((response: ApiResponse<Wizard>) => this.setWizard2(response.result));
-        }
+        // tslint:disable-next-line:max-line-length
+        this.wizardService.getWizardById(this.duel.wiz2Id).then((response: ApiResponse<Wizard>) => this.setWizard2(response.result));
     }
 
     public get loadingPlayers(): boolean {
@@ -89,6 +84,7 @@ export default class DuelComponent extends Vue {
     public setPlayer1(player: Player) {
         this.player1 = player;
         this.loadingPlayer1 = false;
+
     }
 
     public setPlayer2(player: Player) {
@@ -98,7 +94,7 @@ export default class DuelComponent extends Vue {
 
     public get isWin(): boolean {
         // tslint:disable-next-line:max-line-length
-        return (this.duel.wiz1Id === this.wizard.id && this.duel.wiz1Win) || (this.duel.wiz2Id === this.wizard.id && !this.duel.wiz1Win);
+        return this.duel.wiz1Win;
     }
 
     public get isDraw(): boolean {
@@ -107,5 +103,24 @@ export default class DuelComponent extends Vue {
 
     public get isLoss(): boolean {
         return !this.isDraw && !this.isWin;
+    }
+
+    public get duel(): Duel {
+        if (this.wizard.id === this.rawDuel.wiz1Id) {
+            return this.rawDuel;
+        }
+
+        const d: Duel = {} as Duel;
+        d.wiz1Win = !this.rawDuel.wiz1Win;
+        d.wiz1Id = this.rawDuel.wiz2Id;
+        d.wiz1PowerChange = this.rawDuel.wiz2PowerChange;
+        d.moveSet1 = this.rawDuel.moveSet2;
+        d.power1 = this.rawDuel.power2;
+        d.wiz2Id = this.rawDuel.wiz1Id;
+        d.wiz2PowerChange = this.rawDuel.wiz1PowerChange;
+        d.moveSet2 = this.rawDuel.moveSet1;
+        d.power2 = this.rawDuel.power1;
+
+        return d;
     }
 }

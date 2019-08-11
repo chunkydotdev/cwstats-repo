@@ -1,3 +1,15 @@
+
+export interface Stats {
+    seven_day_volume: number;
+    seven_day_change: number;
+    total_volume: number;
+    count: number;
+    num_owners: number;
+    market_cap: number;
+    average_price: number;
+    items_sold: number;
+}
+
 export interface DisplayData {
     card_display_style: string;
     images: string[];
@@ -8,20 +20,20 @@ export interface AssetContract {
     name: string;
     symbol: string;
     image_url: string;
-    large_image_url?: any;
-    featured_image_url?: any;
+    large_image_url: string;
+    featured_image_url: string;
     featured: boolean;
     description: string;
     external_link: string;
     wiki_link?: any;
-    stats: any[];
+    stats: Stats;
     hidden: boolean;
     nft_version: string;
     schema_name: string;
     display_data: DisplayData;
-    short_description?: any;
-    total_supply?: any;
-    owner?: any;
+    short_description: string;
+    total_supply: number;
+    owner: string;
     dev_buyer_fee_basis_points: number;
     dev_seller_fee_basis_points: number;
     opensea_buyer_fee_basis_points: number;
@@ -34,7 +46,7 @@ export interface AssetContract {
     only_proxied_transfers: boolean;
     default_to_fiat: boolean;
     created_date: Date;
-    opensea_version?: any;
+    opensea_version: string;
     asset_contract_type: string;
 }
 
@@ -47,6 +59,17 @@ export interface Owner {
     profile_img_url: string;
     address: string;
     config: string;
+}
+
+export interface Stats2 {
+    seven_day_volume: number;
+    seven_day_change: number;
+    total_volume: number;
+    count: number;
+    num_owners: number;
+    market_cap: number;
+    average_price: number;
+    items_sold: number;
 }
 
 export interface DisplayData2 {
@@ -65,7 +88,7 @@ export interface PrimaryAssetContract {
     description: string;
     external_link: string;
     wiki_link?: any;
-    stats: any[];
+    stats: Stats2;
     hidden: boolean;
     nft_version: string;
     schema_name: string;
@@ -122,6 +145,15 @@ export interface Collection {
     created_date: Date;
 }
 
+export interface Trait {
+    trait_type: string;
+    value: any;
+    display_type?: any;
+    max_value?: any;
+    trait_count: number;
+    order?: any;
+}
+
 export interface Asset {
     id: string;
     address: string;
@@ -132,22 +164,34 @@ export interface Metadata {
     schema: string;
 }
 
+export interface User2 {
+    username: string;
+}
+
 export interface Maker {
-    user: number;
+    user: User2;
     profile_img_url: string;
     address: string;
     config: string;
+}
+
+export interface User3 {
+    username: string;
 }
 
 export interface Taker {
-    user: number;
+    user: User3;
     profile_img_url: string;
     address: string;
     config: string;
 }
 
+export interface User4 {
+    username: string;
+}
+
 export interface FeeRecipient {
-    user: number;
+    user: User4;
     profile_img_url: string;
     address: string;
     config: string;
@@ -163,7 +207,7 @@ export interface PaymentTokenContract {
     usd_price: string;
 }
 
-export interface SellOrder {
+export interface Order {
     created_date: Date;
     closing_date?: any;
     closing_extendable: boolean;
@@ -207,85 +251,6 @@ export interface SellOrder {
     prefixed_hash: string;
 }
 
-export interface Trait {
-    trait_type: string;
-    value: any;
-    display_type?: any;
-    max_value?: any;
-    trait_count: number;
-    order?: any;
-}
-
-export interface User2 {
-    username: string;
-}
-
-export interface WinnerAccount {
-    user: User2;
-    profile_img_url: string;
-    address: string;
-    config: string;
-}
-
-export interface User3 {
-    username: string;
-}
-
-export interface Seller {
-    user: User3;
-    profile_img_url: string;
-    address: string;
-    config: string;
-}
-
-export interface PaymentToken {
-    address: string;
-    image_url?: any;
-    name: string;
-    symbol: string;
-    decimals: number;
-    eth_price: string;
-    usd_price: string;
-}
-
-export interface LastSale {
-    id: number;
-    winner_account: WinnerAccount;
-    from_account?: any;
-    to_account?: any;
-    owner_account?: any;
-    approved_account?: any;
-    seller: Seller;
-    payment_token: PaymentToken;
-    created_date: Date;
-    modified_date: Date;
-    contract_address: string;
-    log_index: string;
-    event_type: string;
-    auction_type?: any;
-    starting_price?: any;
-    ending_price?: any;
-    duration?: any;
-    min_price?: any;
-    offered_to?: any;
-    bid_amount?: any;
-    total_price: string;
-    custom_event_name?: any;
-    quantity?: any;
-    payout_amount?: any;
-    event_timestamp: Date;
-    transaction: number;
-    asset: number;
-    asset_bundle?: any;
-    asset_type?: any;
-    collection: number;
-    payout_account?: any;
-    payout_asset_contract?: any;
-    buy_order?: any;
-    sell_order: number;
-    dev_fee_payment_event?: any;
-}
-
 export interface OpenSeaAsset {
     token_id: string;
     num_sales: number;
@@ -302,15 +267,20 @@ export interface OpenSeaAsset {
     owner: Owner;
     permalink: string;
     collection: Collection;
-    auctions?: any;
-    sell_orders: SellOrder[];
+    auctions: any[];
+    sell_orders?: any;
     traits: Trait[];
-    last_sale: LastSale;
+    last_sale?: any;
     top_bid?: any;
-    current_price: string;
+    current_price?: any;
     current_escrow_price?: any;
     listing_date?: any;
     is_presale: boolean;
     transfer_fee_payment_token?: any;
     transfer_fee?: any;
+    related_assets: any[];
+    orders: Order[];
+    supports_wyvern: boolean;
+    last_bundle_sell_order?: any;
+    top_ownerships: any[];
 }

@@ -43,6 +43,13 @@ export default class DuelDataWizardComponent extends Vue {
         return '';
     }
 
+    public get wiz1Spells(): number[] {
+        if (!!this.duel) {
+            return this.duel.moveSet1;
+        }
+        return [];
+    }
+
     public get wiz1pts(): number {
         if (this.duel.wiz1Id > 0) {
             let pts = 0;
@@ -64,6 +71,13 @@ export default class DuelDataWizardComponent extends Vue {
             return power1;
         }
         return '0';
+    }
+
+    public get wiz2Spells(): number[] {
+        if (!!this.duel) {
+            return this.duel.moveSet2;
+        }
+        return [];
     }
 
     public get wiz2pts(): number {

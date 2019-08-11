@@ -51,8 +51,8 @@
         </div>
         <div class="w-100 mt-5">
             <h3 class="text-left"><u>Duels (NOT REAL DATA)</u></h3>
-            <div v-if="!loadingDuels" class="mt-3" v-for="duel in duels">
-                <DuelComponent :wizard="wizard" :duel="duel"></DuelComponent>
+            <div v-if="!loadingDuels" :key="duel.id + '-' + duel.wiz1Id + '-' + duel.wiz2Id" class="mt-3" v-for="duel in duels">
+                <DuelComponent :wizard="wizard" :rawDuel="duel"></DuelComponent>
             </div>
             <div v-else class="mt-5 w-100 d-flex justify-content-center">
                 <div class="spinner spinner--black-yellow"></div>

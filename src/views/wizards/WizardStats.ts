@@ -8,8 +8,8 @@ import AffinityComponent from '@/components/affinity/Affinity';
 import SpellComponent from '@/components/spell/Spell';
 import DuelComponent from '@/components/duel/Duel';
 import Duel from '@/shared/models/Duel';
-import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
 import OpenSeaService from '@/services/opensea.service';
+import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
 
 @Component({
     components: {
@@ -47,28 +47,33 @@ export default class WizardStatsComponent extends Vue {
         // tslint:disable-next-line:max-line-length
         this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
 
-        // tslint:disable-next-line:max-line-length
-        this.wizardService.getDuels([this.wizardId]).then((response: ApiResponse<Duel[]>) => this.setDuels(response.result));
-
-        this.openSeaService.getWizard(this.wizardId).then((response: any) => this.setOpenSeaAsset(response.asset));
     }
 
     @Watch('$route')
     public onRouteChange() {
         // tslint:disable-next-line:no-string-literal
         this.wizardId = +router.currentRoute.params['id'];
-
+        this.duels = [];
         this.loadingWizard = true;
+        this.loadingDuels = true;
+        this.openSeaAsset = null;
+
+        // tslint:disable-next-line:max-line-length
+        this.wizard = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMove: 0, wins: 0, losses: 0, draws: 0, duelCount: 0 };
+
         // tslint:disable-next-line:max-line-length
         this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
 
-        // tslint:disable-next-line:max-line-length
-        this.wizardService.getDuels([this.wizardId]).then((response: ApiResponse<Duel[]>) => this.setDuels(response.result));
     }
 
     public setWizard(wizard: Wizard) {
         this.wizard = wizard;
         this.loadingWizard = false;
+
+        // tslint:disable-next-line:max-line-length
+        this.wizardService.getDuels([this.wizardId]).then((response: ApiResponse<Duel[]>) => this.setDuels(response.result));
+
+        this.openSeaService.getWizard(this.wizardId).then((response: any) => this.setOpenSeaAsset(response));
     }
 
     public setOpenSeaAsset(asset: OpenSeaAsset) {
@@ -81,8 +86,9 @@ export default class WizardStatsComponent extends Vue {
     }
 
     public get isForSale(): boolean {
+        // tslint:disable-next-line:max-line-length
         if (!!this.openSeaAsset) {
-            return this.openSeaAsset.sell_orders !== null && this.openSeaAsset.sell_orders.length > 0;
+            return (!!this.openSeaAsset.sell_orders || !!this.openSeaAsset.orders);
         }
         return false;
     }

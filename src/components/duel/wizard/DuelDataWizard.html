@@ -10,8 +10,8 @@
                 </div>
             </div>
             <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">
-                <router-link class="text-white" :to="'/wizards/'+duel.wiz1Id">
-                    {{ duel.wiz1Id }}
+                <router-link class="text-white" :to="'/wizards/'+wizard.id">
+                    {{ wizard.id }}
                 </router-link>
             </div>
         </div>
@@ -56,13 +56,13 @@
             </div>
             <div class="spell-order order-2 order-md-1 d-flex d-md-block flex-column mt-3 mt-md-0">
                 <table class="spell-order--table">
-                    <tr v-for="(spell, index) in duel.moveSet1">
+                    <tr v-for="(spell, index) in wiz1Spells">
                         <td>
                             <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell"></SpellComponent>
                         </td>
                         <td class="px-3 text-nowrap">Spell {{ index }}</td>
                         <td>
-                            <SpellComponent :win="isSpellWin(index, 2)" :critical="isSpellCritical(index, 2)" :affinity="duel.moveSet2[index]"></SpellComponent>
+                            <SpellComponent :win="isSpellWin(index, 2)" :critical="isSpellCritical(index, 2)" :affinity="wiz2Spells[index]"></SpellComponent>
                         </td>
                     </tr>
                 </table>

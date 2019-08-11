@@ -26,8 +26,11 @@ export default class DuelDataPlayerComponent extends Vue {
     }
 
     public readablePower(power: number) {
-        const power1 = power.toString().substring(0, power.toString().length - 12);
-        return power1;
+        if (!!power) {
+            const power1 = power.toString().substring(0, power.toString().length - 12);
+            return power1;
+        }
+        return 0;
     }
 
 }

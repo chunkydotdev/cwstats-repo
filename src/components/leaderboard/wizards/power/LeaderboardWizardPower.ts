@@ -1,9 +1,10 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Wizard } from '@/shared/models/Wizard';
-import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
+import { OpenSeaAsset } from '@/shared/models/OpenSeaAsset';
 import OpenSeaService from '@/services/opensea.service';
 import WizardService from '@/services/wizard.service';
 import LeaderboardWizard from '@/shared/models/LeadeboardWizard';
+import ApiResponse from '@/shared/models/ApiResponse';
 
 @Component({})
 export default class LeaderboardWizardPowerComponent extends Vue {
@@ -27,7 +28,7 @@ export default class LeaderboardWizardPowerComponent extends Vue {
 
         const wizardIds = this.wizards.map((w: Wizard) => w.id);
         // tslint:disable-next-line:max-line-length
-        this.openSeaService.getWizards(wizardIds, 100, 0).then((response: any) => this.setOpenSeaWizards(response.assets));
+        this.openSeaService.getWizards(wizardIds, 100, 0).then((response: ApiResponse<OpenSeaAsset[]>) => this.setOpenSeaWizards(response.result));
 
     }
 

@@ -65,6 +65,30 @@ input {
   border-bottom: transparent !important;
 }
 
+.spinner--black-yellow {
+  border-color: black !important;
+  border-bottom: transparent !important;
+}
+
+.spinner--black-yellow:after {
+  border-color: #fff032 !important;
+  border-bottom: transparent !important;
+}
+
+.spinner--small {
+  border-width: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.spinner--small:after {
+  height: 18px !important;
+  width: 18px !important;
+  border-width: 3px !important;
+  top: -4px !important;
+  left: -4px !important;
+}
+
 .spinner:after {
   content: '';
   position: absolute;
@@ -96,18 +120,6 @@ input {
   outline: 1px solid black;
 }
 
-.duel--inner-outline.win {
-  background-color: lightgreen;
-}
-
-.duel--inner-outline.loss {
-  background-color: lightcoral;
-}
-
-.duel--inner-outline.draw {
-  background-color: #ffd45a;
-}
-
 .duel--inner-outline .expand-duel {
   height: 20px;
 }
@@ -122,13 +134,13 @@ input {
 }
 
 .win {
-  background-color: lightgreen;
+  background-color: #bcf5bc;
 }
 
 .draw {
-  background-color: #ffc107;
+  background-color: #ffc033;
 }
 
 .loss {
-  background-color: lightcoral;
+  background-color: #f5aeae;
 }

@@ -10,8 +10,8 @@ import SpellComponent from '../../components/spell/Spell';
 import SmallWizardImageComponent from '../../components/small-wizard/SmallWizardImage';
 import web3 from 'web3';
 import OpenSeaService from '@/services/opensea.service';
-import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
 import LeaderboardWizard from '@/shared/models/LeadeboardWizard';
+import { OpenSeaAsset } from '@/shared/models/OpenseaAsset';
 
 @Component({
     components: {
