@@ -40,7 +40,7 @@ export default class WizardStatsComponent extends Vue {
         // tslint:disable-next-line:no-string-literal
         this.wizardId = +router.currentRoute.params['id'];
         // tslint:disable-next-line:max-line-length
-        this.wizard = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMove: 0, wins: 0, losses: 0, draws: 0, duelCount: 0 };
+        this.wizard = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMoves: [], commonMovesProbabilities: [], wins: 0, losses: 0, draws: 0, duelCount: 0 };
         this.openSeaAsset = null;
         this.duels = [];
 
@@ -59,7 +59,7 @@ export default class WizardStatsComponent extends Vue {
         this.openSeaAsset = null;
 
         // tslint:disable-next-line:max-line-length
-        this.wizard = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMove: 0, wins: 0, losses: 0, draws: 0, duelCount: 0 };
+        this.wizard = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMoves: [], commonMovesProbabilities: [], wins: 0, losses: 0, draws: 0, duelCount: 0 };
 
         // tslint:disable-next-line:max-line-length
         this.wizardService.getWizardById(this.wizardId).then((response: ApiResponse<Wizard>) => this.setWizard(response.result));
@@ -91,6 +91,25 @@ export default class WizardStatsComponent extends Vue {
             return (!!this.openSeaAsset.sell_orders || !!this.openSeaAsset.orders);
         }
         return false;
+    }
+
+    public get wizardSpellProbabilities(): number[][][] {
+        const calculatedMoves: number[][][] = [];
+        for (let i = 0; i < 3; i++) {
+            calculatedMoves[i] = [];
+            for (let j = 0; j < 5; j++) {
+                calculatedMoves[i][j] = [];
+            }
+        }
+        let index = 0;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 5; j++) {
+                // tslint:disable-next-line:max-line-length
+                calculatedMoves[i][j].push(this.wizard.commonMoves[index], this.wizard.commonMovesProbabilities[index]);
+                index++;
+            }
+        }
+        return calculatedMoves;
     }
 
     public get getWizardAffinity(): number {

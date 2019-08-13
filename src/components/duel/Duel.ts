@@ -45,7 +45,7 @@ export default class DuelComponent extends Vue {
         this.expanded = false;
         this.category = 'wizards';
         // tslint:disable-next-line:max-line-length
-        this.wizard2 = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMove: 0, wins: 0, losses: 0, draws: 0, duelCount: 0 };
+        this.wizard2 = { id: 0, affinity: 0, power: '', owner: '', commonMoveSet: [], commonMoves: [], commonMovesProbabilities: [], wins: 0, losses: 0, draws: 0, duelCount: 0 };
         this.wizardService = new WizardService();
 
         // tslint:disable-next-line:max-line-length

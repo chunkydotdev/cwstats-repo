@@ -1,3 +1,23 @@
 .wizardstats--owner {
   max-width: 100px;
 }
+
+.wizardstats .spell-title {
+  font-family: exocet;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.wizardstats .spell-probabilities {
+  width: 260px;
+  border-collapse: collapse;
+}
+
+.wizardstats .spell-probabilities tr {
+  max-height: 35px;
+}
+
+.wizardstats .spell-probabilities tr td {
+  max-height: 35px;
+  width: 50px;
+}

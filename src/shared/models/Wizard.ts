@@ -8,5 +8,6 @@ export interface Wizard {
     draws: number;
     duelCount: number;
     commonMoveSet: number[];
-    commonMove: number;
+    commonMoves: number[];
+    commonMovesProbabilities: number[];
 }

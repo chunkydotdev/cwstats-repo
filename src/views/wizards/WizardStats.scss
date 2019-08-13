@@ -2,4 +2,25 @@
     &--owner {
         max-width: 100px;
     }
+
+    .spell-title {
+        font-family: exocet;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    .spell-probabilities {
+        width: 260px;
+        border-collapse: collapse;
+        tr {
+            max-height: 35px;
+            td {
+                max-height: 35px;
+                width: 50px;
+            }
+
+            &__data {
+            }
+        }
+    }
 }
