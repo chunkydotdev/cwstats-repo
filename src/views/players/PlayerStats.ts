@@ -103,12 +103,12 @@ export default class PlayerStatsComponent extends Vue {
 
     public setStats(stats: Stats) {
         this.stats = stats;
-        this.loadingStats = false;    // tslint:disable-next-line:max-line-length
+        this.loadingStats = false;
 
         this.datasetPower = {
             labels: this.stats.readableDates,
             // tslint:disable-next-line:max-line-length
-            datasets: [{ data: this.stats.powerPerDay.map(n => this.getReadablePower(n)), label: 'Power', backgroundColor: 'green', fill: false, borderColor: 'green' }],
+            datasets: [{ data: this.stats.powerPerDay.map((n: number) => this.getReadablePower(n)), label: 'Power', backgroundColor: 'green', fill: false, borderColor: 'green' }],
         };
 
     }

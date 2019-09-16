@@ -126,7 +126,7 @@ export default class WizardStatsComponent extends Vue {
         this.datasetPower = {
             labels: stats.readableDates,
             // tslint:disable-next-line:max-line-length
-            datasets: [{ data: stats.powerPerDay.map(n => this.getReadablePower(n)), label: 'Power', backgroundColor: 'green', fill: false, borderColor: 'green' }],
+            datasets: [{ data: stats.powerPerDay.map((n: number) => this.getReadablePower(n)), label: 'Power', backgroundColor: 'green', fill: false, borderColor: 'green' }],
         };
 
         const offsetWidth = document.getElementById('wizardstats-content');
