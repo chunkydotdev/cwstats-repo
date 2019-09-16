@@ -3,11 +3,15 @@ import { Wizard } from '@/shared/models/Wizard';
 import Duel from '@/shared/models/Duel';
 import AffinityComponent from '../../affinity/Affinity';
 import SpellComponent from '../../spell/Spell';
+// @ts-ignore
+import TrendChart from 'vue-trend-chart';
+import Popper from 'popper.js';
 
 @Component({
     components: {
         AffinityComponent,
         SpellComponent,
+        TrendChart,
     },
 })
 export default class DuelDataWizardComponent extends Vue {
@@ -23,81 +27,59 @@ export default class DuelDataWizardComponent extends Vue {
     @Prop()
     public expanded!: boolean;
 
+    // for the graph
+    public datasets: Array<{ data: number[], smooth: boolean, fill: boolean, showPoints: boolean }>;
+    public grid: { verticalLines: boolean, horizontalLines: boolean };
+    public labels: { xLabels: string[], yLabels: number };
+    public min: number;
+    public max: number;
+
+    private tooltipData: MouseEvent | null;
+    private popper: Popper | null;
+    private popperIsActive: boolean;
+
     constructor() {
         super();
-    }
 
-    public get imageUrlWiz1(): string {
-        if (this.duel.wiz1Id > 0) {
-            // tslint:disable-next-line:max-line-length
-            return `https://storage.googleapis.com/cheeze-wizards-production/0xec2203e38116f09e21bc27443e063b623b01345a/${ this.duel.wiz1Id }.svg`;
-        }
-        return '';
-    }
-
-    public get imageUrlWiz2(): string {
-        if (this.duel.wiz2Id > 0) {
-            // tslint:disable-next-line:max-line-length
-            return `https://storage.googleapis.com/cheeze-wizards-production/0xec2203e38116f09e21bc27443e063b623b01345a/${ this.duel.wiz2Id }.svg`;
-        }
-        return '';
-    }
-
-    public get wiz1Spells(): number[] {
-        if (!!this.duel) {
-            return this.duel.moveSet1;
-        }
-        return [];
-    }
-
-    public get wiz1pts(): number {
-        if (this.duel.wiz1Id > 0) {
-            let pts = 0;
-            for (let i = 0; i < 3; i++) {
-                if (this.calculateSpellWinDrawLoss(this.duel.moveSet1[i], this.duel.moveSet2[i]) > 0) {
-                    pts++;
-                }
+        this.min = 0;
+        this.max = 0;
+        this.duel.historicScores.forEach((s: number) => {
+            if (s < this.min) {
+                this.min = s;
             }
-            return pts;
-        }
-        return 0;
+            if (s > this.max) {
+                this.max = s;
+            }
+        });
+
+        this.min = -Math.max(-this.min, this.max);
+        this.max = -this.min;
+        this.grid = { verticalLines: true, horizontalLines: true };
+        this.labels = { xLabels: ['start', 'S1', 'S2', 'S3', 'S4', 'S5'], yLabels: 3 };
+        this.datasets = [{ smooth: false, fill: false, data: [0].concat(this.duel.historicScores), showPoints: true }];
+        this.tooltipData = null;
+        this.popperIsActive = false;
+        this.popper = null;
+        this.$nextTick(() => {
+            this.popper = this.initPopper();
+        });
+    }
+
+    public get scoreChartId(): string {
+        return 'historic-duel-chart-' + this.duel.duelId;
     }
 
     public get wiz1pwr(): string {
         if (this.duel.wiz1Id > 0) {
-            const power1 = this.wizard.power.toString().substring(0, this.wizard.power.toString().length - 12);
-            // tslint:disable-next-line:max-line-length
-            const power2 = this.wizard.power.toString().substring(power1.length, this.wizard.power.toString().length - 9);
+            const power1 = this.duel.power1.toString().substring(0, this.wizard.power.toString().length - 12);
             return power1;
         }
         return '0';
     }
 
-    public get wiz2Spells(): number[] {
-        if (!!this.duel) {
-            return this.duel.moveSet2;
-        }
-        return [];
-    }
-
-    public get wiz2pts(): number {
-        if (this.duel.wiz2Id > 0) {
-            let pts = 0;
-            for (let i = 0; i < 3; i++) {
-                if (this.calculateSpellWinDrawLoss(this.duel.moveSet2[i], this.duel.moveSet1[i]) > 0) {
-                    pts++;
-                }
-            }
-            return pts;
-        }
-        return 0;
-    }
-
     public get wiz2pwr(): string {
         if (this.duel.wiz2Id > 0) {
-            const power1 = this.wizard2.power.toString().substring(0, this.wizard2.power.toString().length - 12);
-            // tslint:disable-next-line:max-line-length
-            const power2 = this.wizard2.power.toString().substring(power1.length, this.wizard2.power.toString().length - 9);
+            const power1 = this.duel.power2.toString().substring(0, this.wizard2.power.toString().length - 12);
             return power1;
         }
         return '0';
@@ -108,53 +90,34 @@ export default class DuelDataWizardComponent extends Vue {
         return power1;
     }
 
-    public isSpellWin(index: number, wizard: number): boolean {
-        let result = 0;
-        if (wizard === 1) {
-            result = this.calculateSpellWinDrawLoss(this.duel.moveSet1[index], this.duel.moveSet2[index]);
-        } else {
-            result = this.calculateSpellWinDrawLoss(this.duel.moveSet2[index], this.duel.moveSet1[index]);
-        }
-
-        return result === 1;
-
-    }
-
-    public isSpellCritical(index: number, wizard: number): boolean {
-        if (wizard === 1) {
-            return this.duel.moveSet1[index] === this.wizard.affinity;
-        } else {
-            return this.duel.moveSet2[index] === this.wizard2.affinity;
-        }
-    }
-
-    private calculateSpellWinDrawLoss(spell1: number, spell2: number): number {
-        if (spell1 === 2) {
-            if (spell2 === 3) {
-                return -1;
-            } else if (spell2 === 4) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else if (spell1 === 3) {
-            if (spell2 === 4) {
-                return -1;
-            } else if (spell2 === 2) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
-            if (spell2 === 2) {
-                return -1;
-            } else if (spell2 === 3) {
-                return 1;
-            } else {
-                return 0;
+    private initPopper() {
+        const chart = document.querySelector('#' + this.scoreChartId);
+        if (!!chart) {
+            const ref = chart.querySelector('.active-line');
+            if (!!ref) {
+                const tooltip = this.$refs['tooltip' + this.duel.duelId] as Element;
+                return new Popper(ref, tooltip, {
+                    placement: 'right',
+                    modifiers: {
+                        offset: { offset: '0,10' },
+                        preventOverflow: {
+                            boundariesElement: chart,
+                        },
+                    },
+                });
             }
         }
+        return null;
     }
 
+    private onMouseMove(params: MouseEvent) {
+        this.popperIsActive = !!params;
+        if (!!this.popper) {
+            this.popper.scheduleUpdate();
+        } else {
+            this.popper = this.initPopper();
+        }
+        this.tooltipData = params || null;
+    }
 
 }

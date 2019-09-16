@@ -1,0 +1,25 @@
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../shared/scss/bootstrap-ext.scss';
+
+.percentage-line {
+    min-width: 180px;
+
+    &__background {
+        height: 5px;
+    }
+
+    &__fill {
+        background-color: black;
+        height: 3px;
+
+        &--green {
+            background-color: green;
+        }
+
+        &--yellow {
+            background-color: $color-yellow-03;
+        }
+    }
+}

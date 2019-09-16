@@ -1,0 +1,39 @@
+<div class="leaderboard-wizard-wins position-relative">
+    <div v-if="fetchingOpensea" class="load-opensea position-absolute text-white text-uppercase d-flex justify-content-center align-items-center w-100 mt-n4">
+        <img class="flex-shrink-0 mr-3" width="20" height="20" src="../../../../assets/opensea-logomark-flat-colored-blue.svg" />
+        <div class="position-relative d-inner-block text-nowrap">
+            Fetching opensea data
+            <div class="position-absolute dot dot--1"></div>
+            <div class="position-absolute dot dot--2"></div>
+            <div class="position-absolute dot dot--3"></div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr class="text-left">
+                <th class="pr-3"><u>#</u></th>
+                <th class="pr-3"><u>Wins</u></th>
+                <th class="pr-3"><u>Id</u></th>
+                <th><u>Owner</u></th>
+            </tr>
+        </thead>
+        <tbody
+            <tr class="text-left" v-for="(asset, index) in wizardAssets">
+                <td class="pr-3">{{ index + 1 }}</td>
+                <td class="pr-3">{{asset.wizard.wins}}</td>
+                <td class="pr-2">
+                    <router-link class="text-white mr-2" :to="'/wizards/'+asset.wizard.id">{{ asset.wizard.id }}</router-link>
+                    <a
+                        v-if="asset.forSale"
+                        target="_blank"
+                        :href="'https://opensea.io/assets/0x2f4bdafb22bd92aa7b7552d270376de8edccbc1e/'+asset.wizard.id+'?ref=0x1281a133b59788b9e3eb4f7603babe538fb60584'"
+                        ><img src="../../../../assets/opensea-logomark-flat-colored-blue.svg" height="20" width="20"
+                    /></a>
+                </td>
+                <td class="td-owner text-truncate">
+                    <router-link class="text-white" :to="'/players/'+asset.wizard.owner">{{ asset.wizard.owner }}</router-link>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

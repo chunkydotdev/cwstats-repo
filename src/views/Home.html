@@ -34,7 +34,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <button class="btn-cw m-1" :class="{'active': isPowerActive}" @click="leaderboardSubCategory = 'power'">Power</button>
-                <!--<button class="btn-cw m-1" :class="{'active': isWinsActive}" @click="leaderboardSubCategory = 'wins'">Wins</button>-->
+                <button class="btn-cw m-1" :class="{'active': isWinsActive}" @click="leaderboardSubCategory = 'wins'">Wins</button>
                 <button v-if="isPlayersActive" class="btn-cw m-1" :class="{'active': isWizardsCountActive}" @click="leaderboardSubCategory = 'wizardscount'"
                     >Wizards</button
                 >
@@ -47,11 +47,13 @@
                 :wizards="topWizards"
                 :loading="false"
             ></LeaderboardWizardPowerComponent>
+            <LeaderboardWizardWinsComponent v-else-if="isWizardsActive && isWinsActive" :wizards="topWizards" :loading="false"></LeaderboardWizardWinsComponent>
             <LeaderboardPlayerPowerComponent
                 v-else-if="isPlayersActive && isPowerActive"
                 :players="topPlayers"
                 :loading="false"
             ></LeaderboardPlayerPowerComponent>
+            <LeaderboardPlayerWinsComponent v-else-if="isPlayersActive && isWinsActive" :players="topPlayers" :loading="false"></LeaderboardPlayerWinsComponent>
             <LeaderboardPlayerWizardsComponent
                 v-else-if="isPlayersActive && isWizardsCountActive"
                 :players="topPlayers"

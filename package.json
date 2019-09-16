@@ -1,41 +1,45 @@
 {
-  "name": "cwstats.com",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "axios": "^0.19.0",
-    "bootstrap": "^4.3.1",
-    "core-js": "^2.6.5",
-    "qs": "^6.7.0",
-    "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
-    "vue-property-decorator": "^8.1.0",
-    "vue-router": "^3.0.3",
-    "web3": "^1.2.1"
-  },
-  "devDependencies": {
-    "@types/qs": "^6.5.3",
-    "@types/web3": "^1.0.19",
-    "@vue/cli-plugin-babel": "^3.9.0",
-    "@vue/cli-plugin-typescript": "^3.9.0",
-    "@vue/cli-service": "^3.9.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.1.0",
-    "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "name": "cwstats.com",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "bootstrap": "^4.3.1",
+        "chart.js": "^2.8.0",
+        "core-js": "^2.6.5",
+        "popper.js": "^1.15.0",
+        "qs": "^6.7.0",
+        "vue": "^2.6.10",
+        "vue-chartjs": "^3.4.2",
+        "vue-class-component": "^7.0.2",
+        "vue-property-decorator": "^8.1.0",
+        "vue-router": "^3.0.3",
+        "vue-trend-chart": "^0.14.4",
+        "web3": "^1.2.1"
+    },
+    "devDependencies": {
+        "@types/qs": "^6.5.3",
+        "@types/web3": "^1.0.19",
+        "@vue/cli-plugin-babel": "^3.9.0",
+        "@vue/cli-plugin-typescript": "^3.9.0",
+        "@vue/cli-service": "^3.9.0",
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.1.0",
+        "typescript": "^3.4.3",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions"
+    ]
 }

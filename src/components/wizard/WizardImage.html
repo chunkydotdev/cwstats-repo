@@ -1,12 +1,25 @@
 <div class="wizard-image">
-    <div class="wizard-image--border d-flex justify-content-center align-items-center position-relative">
-        <div class="img-container" :class="{'basic-bg': affinity === 1, 'fire-bg': affinity === 2, 'water-bg': affinity === 3, 'wind-bg': affinity === 4}">
-            <img :src="imageUrl" v-if="imageUrl !== '' && !loading" />
-            <div class="w-100 h-100 d-flex justify-content-center align-items-center">
-                <div class="spinner"></div>
+    <div class="wizard-image--border d-flex justify-content-center align-items-center position-relative rounded-circle border border-dark">
+        <div
+            class="img-container rounded-circle border border-dark position-relative"
+            :class="{'basic-bg': affinity === 1, 'fire-bg': affinity === 2, 'water-bg': affinity === 3, 'wind-bg': affinity === 4}"
+        >
+            <div v-if="!loading" class="img-container__affinity position-absolute">
+                <AffinityComponent :affinity="affinity"></AffinityComponent>
+            </div>
+            <div class="img-fake-container position-relative">
+                <div v-if="loading" class="pt-5 mt-3 w-100 h-100 d-flex justify-content-center align-items-center">
+                    <div class="spinner"></div>
+                </div>
+                <img :src="imageUrl" v-else-if="imageUrl !== ''" />
+                <div class="img-fake-container__banner position-absolute d-flex justify-content-center align-items-center bg-dark text-white">
+                    <h5 class="m-0">
+                        {{ id }}
+                    </h5>
+                </div>
             </div>
         </div>
-        <div v-if="forSale" class="wizard-image__for-sale position-absolute bg-white border-bottom border-right border-dark p-1">
+        <div v-if="forSale && !loadingAsset" class="wizard-image__for-sale position-absolute bg-white p-1 rounded-circle">
             <a
                 target="_blank"
                 :href="'https://opensea.io/assets/0x2f4bdafb22bd92aa7b7552d270376de8edccbc1e/'+id+'?ref=0x1281a133b59788b9e3eb4f7603babe538fb60584'"

@@ -1,0 +1,49 @@
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Wizard } from '@/shared/models/Wizard';
+import { OpenSeaAsset } from '@/shared/models/OpenSeaAsset';
+import OpenSeaService from '@/services/opensea.service';
+import WizardService from '@/services/wizard.service';
+import LeaderboardWizard from '@/shared/models/LeadeboardWizard';
+import ApiResponse from '@/shared/models/ApiResponse';
+
+@Component({})
+export default class LeaderboardWizardWinsComponent extends Vue {
+    @Prop()
+    public loading!: boolean;
+    @Prop()
+    public wizards!: Wizard[];
+
+    public openSeaWizards: OpenSeaAsset[];
+    public openSeaService: OpenSeaService;
+    public fetchingOpensea: boolean;
+    public wizardAssets: LeaderboardWizard[];
+
+    constructor() {
+        super();
+        this.fetchingOpensea = true;
+        this.openSeaWizards = [];
+        this.openSeaService = new OpenSeaService();
+        this.wizardAssets = [];
+        this.wizards.forEach((wizard: Wizard) => this.wizardAssets.push({ wizard, forSale: false }));
+
+        const wizardIds = this.wizards.map((w: Wizard) => w.id);
+        // tslint:disable-next-line:max-line-length
+        this.openSeaService.getWizards(wizardIds, 100, 0).then((response: ApiResponse<OpenSeaAsset[]>) => this.setOpenSeaWizards(response.result));
+
+    }
+
+    public setOpenSeaWizards(wizards: OpenSeaAsset[]) {
+        wizards.forEach((w: OpenSeaAsset) => {
+            const wAssetIndex = this.wizardAssets.findIndex((a: LeaderboardWizard) => a.wizard.id === +w.token_id);
+            if (wAssetIndex >= 0) {
+                const wa = this.wizardAssets[wAssetIndex];
+                wa.forSale = w.sell_orders !== null && w.sell_orders.length > 0;
+                this.wizardAssets.splice(wAssetIndex, 1, wa);
+            }
+        });
+
+        this.wizardAssets.sort((a: LeaderboardWizard, b: LeaderboardWizard) => b.wizard.wins - a.wizard.wins);
+        this.fetchingOpensea = false;
+    }
+
+}

@@ -1,4 +1,7 @@
-<div class="cookiefooter p-3">
+<div class="cookiefooter p-3 position-fixed bg-white border-top border-dark" v-if="showCookieMessage">
     <h5 class="text-left">Cookies</h5>
-    <p>This site uses cookies and by using the site you accept the use of them.</p>
+    <p>
+        This site uses cookies and by using the site you accept the use of them.
+        <button class="btn-cw bg-dark px-3" @click="acceptCookies()">Ok</button>
+    </p>
 </div>

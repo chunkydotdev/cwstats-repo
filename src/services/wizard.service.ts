@@ -5,6 +5,7 @@ import Duel from '@/shared/models/Duel';
 import Player from '@/shared/models/Player';
 import * as qs from 'qs';
 import { LeaderboardCategory } from '@/shared/models/LeaderboardCategory';
+import { Stats } from '@/shared/models/Stats';
 
 const baseUrl = 'https://api2.moonfarm.co/api/cheezewizard/';
 
@@ -23,9 +24,9 @@ export default class WizardService {
         });
     }
 
-    public async getTopWizardsByPower(count: number): Promise<ApiResponse<Wizard[]>> {
+    public async getTopWizards(category: LeaderboardCategory, count: number): Promise<ApiResponse<Wizard[]>> {
         // tslint:disable-next-line:max-line-length
-        return await axios.get(`${ baseUrl }wizards/top/power/${ count }`).then((response: AxiosResponse<ApiResponse<Wizard[]>>) => {
+        return await axios.get(`${ baseUrl }wizards/top/${ LeaderboardCategory[category] }/${ count }`).then((response: AxiosResponse<ApiResponse<Wizard[]>>) => {
             return response.data;
         });
     }
@@ -37,18 +38,12 @@ export default class WizardService {
         });
     }
 
-    public async getDuels(wizardIds: number[]): Promise<ApiResponse<Duel[]>> {
+    public async getDuels(wizardId: number): Promise<ApiResponse<Duel[]>> {
         // tslint:disable-next-line:max-line-length
-        return await axios.get(`${ baseUrl }duels`, {
-            params: {
-                wizardIds,
-            },
-            paramsSerializer: (params) => {
-                return qs.stringify(params);
-            },
-        }).then((response: AxiosResponse<ApiResponse<Duel[]>>) => {
-            return response.data;
-        });
+        return await axios.get(`${ baseUrl }duels/${ wizardId }`)
+            .then((response: AxiosResponse<ApiResponse<Duel[]>>) => {
+                return response.data;
+            });
     }
 
     public async getPlayer(address: string): Promise<ApiResponse<Player>> {
@@ -61,6 +56,20 @@ export default class WizardService {
     public async getTopPlayers(category: LeaderboardCategory, count: number): Promise<ApiResponse<Player[]>> {
         // tslint:disable-next-line:max-line-length
         return await axios.get(`${ baseUrl }players/top/${ LeaderboardCategory[category] }/${ count }`).then((response: AxiosResponse<ApiResponse<Player[]>>) => {
+            return response.data;
+        });
+    }
+
+    public async getPlayerStats(address: string): Promise<ApiResponse<Stats>> {
+        // tslint:disable-next-line:max-line-length
+        return await axios.get(`${ baseUrl }players/stats/${ address }`).then((response: AxiosResponse<ApiResponse<Stats>>) => {
+            return response.data;
+        });
+    }
+
+    public async getWizardStats(id: number): Promise<ApiResponse<Stats>> {
+        // tslint:disable-next-line:max-line-length
+        return await axios.get(`${ baseUrl }wizards/stats/${ id }`).then((response: AxiosResponse<ApiResponse<Stats>>) => {
             return response.data;
         });
     }

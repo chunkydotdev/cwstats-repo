@@ -10,6 +10,10 @@
     }
 }
 
+.shadow {
+    box-shadow: 5px 5px 0 black !important;
+}
+
 .custom-select {
     background-color: $color-yellow-primary;
     color: black;
@@ -30,8 +34,48 @@
     background-color: lightgreen !important;
 }
 
+.bg-yellow-1 {
+    background-color: $color-yellow-01 !important;
+}
+
 .bg-dark {
     background-color: black !important;
+}
+
+.bg-pink {
+    //background: linear-gradient(#000, $color-basic-dark, $color-basic-dark);
+    background-color: $color-basic-dark !important;
+}
+
+.text-pink {
+    color: $color-basic-dark !important;
+}
+
+.bg-blue {
+    //background: linear-gradient($color-basic-dark, $color-water-dark, $color-water-dark, $color-water-dark);
+    background-color: $color-water-dark !important;
+}
+
+.text-blue {
+    color: $color-water-dark !important;
+}
+
+.bg-red {
+    //background: linear-gradient($color-water-dark, $color-fire-dark, $color-fire-dark, $color-fire-dark);
+    background-color: $color-fire-dark !important;
+}
+
+.text-red {
+    color: $color-fire-dark !important;
+}
+
+.bg-green {
+    //background: linear-gradient($color-fire-dark, $color-wind-dark, $color-wind-dark, $color-wind-dark, #000);
+    background-color: $color-wind-dark !important;
+}
+
+.text-green {
+    color: $color-wind-dark !important;
 }
 
 .text-warning {
@@ -40,6 +84,10 @@
 
 .border-dark {
     border-color: black !important;
+}
+
+.text-dark {
+    color: black !important;
 }
 
 input {

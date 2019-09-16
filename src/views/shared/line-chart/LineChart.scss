@@ -1,0 +1,26 @@
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../shared/scss/bootstrap-ext.scss';
+
+.line-chart {
+    margin: 10px;
+    color: black !important;
+
+    &__background {
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        z-index: -1;
+        box-shadow: 5px 5px 0 black;
+
+        &--inner-outline {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            outline: 1px solid black;
+        }
+    }
+}

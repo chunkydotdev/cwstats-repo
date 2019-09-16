@@ -7,21 +7,24 @@
 .home {
     margin-left: -15px;
     margin-right: -15px;
+
     .searchinput {
         max-width: 600px;
     }
 
     .high-scores {
         background: url('../assets/melted-cheeze.svg') repeat-x;
-        background-size: contain;
+        background-size: 101%;
         background-color: black;
-        background-position: top -5px left;
+        background-position: top -5px left -2px;
         color: white;
         padding-top: 5vh;
         min-height: 80vh;
+
         @include media-breakpoint-up(sm) {
             padding-top: 10vh;
         }
+
         @include media-breakpoint-up(md) {
             padding-top: 20vh;
         }
@@ -31,6 +34,7 @@
         tr {
             .td-owner {
                 max-width: 100px;
+
                 @include media-breakpoint-up(md) {
                     max-width: 100%;
                 }

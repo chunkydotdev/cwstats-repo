@@ -1,71 +1,93 @@
-<div class="wizardstats py-5 d-flex flex-wrap flex-md-nowrap">
-    <div class="d-flex flex-column">
-        <WizardImageComponent :forSale="isForSale" :loading="loadingWizard" :id="getWizardId" :affinity="getWizardAffinity"></WizardImageComponent>
-        <div class="d-flex flex-column mt-3">
-            <div class="d-flex justify-content-between mb-2">
-                <div>Id:</div><div>{{ getWizardId }}</div>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Owner:</div
-                ><div class="wizardstats--owner text-truncate">
+<div class="wizardstats">
+    <div class="wizardstats__wizard d-flex bg-dark mx-n3 pt-5 position-relative mb-3">
+        <div class="wizardstats__wizard-container container mb-n5 pt-5 position-relative">
+            <img class="wizardstats__cloud1 position-absolute d-none d-sm-block" src="../../assets/cloud1.svg" />
+            <img class="wizardstats__cloud2 position-absolute" src="../../assets/cloud2.svg" />
+            <WizardImageComponent :forSale="isForSale" :loading="loadingWizard" :loadingAsset="loadingAsset" :id="getWizardId" :affinity="getWizardAffinity"></WizardImageComponent>
+            <div class="wizardstats__owner position-absolute bg-white rounded-top border-left border-top border-right border-dark">
+                <div class="wizardstats--owner text-truncate mx-2">
                     <router-link class="text-dark" :to="'/players/'+wizard.owner">
                         {{ wizard.owner }}
                     </router-link>
                 </div>
             </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Affinity:</div>
-                <AffinityComponent :affinity="getWizardAffinity"></AffinityComponent>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pt-5 pb-4 row">
+            <div class="col-12 d-flex justify-content-center">
+                <div v-if="loadingStats" class="spinner spinner--yellow-black"></div>
             </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Power:</div><div>{{ getWizardPower }}</div>
+            <div class="col-12 col-md-4 playerstats__stats" v-if="!loadingStats">
+                <div class="d-flex flex-column px-3 px-md-4 py-3 bg-white mb-5 shadow border border-dark ">
+                    <div class="d-flex flex-column pt-3">
+                        <div class="d-flex justify-content-between">
+                            <div>Power:</div><div>{{ getWizardPower }}</div>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <PercentageLineComponent :prefix="'power'" :percentage="stats.placementPercentagePower" :placement="stats.placementPower" :max="stats.totalWizards"/>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Wins:</div><div>{{ wizard.wins }}</div>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <PercentageLineComponent :prefix="'wins'" :percentage="stats.placementPercentageWins" :placement="stats.placementWins" :max="stats.totalWizards"/>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Losses:</div><div>{{ wizard.losses }}</div>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <PercentageLineComponent :prefix="'losses'" :percentage="stats.placementPercentageLosses" :placement="stats.placementLosses" :max="stats.totalWizards"/>
+                        </div>
+                        <div class="d-flex justify-content-between ">
+                            <div>Draws:</div><div>{{ wizard.draws }}</div>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <PercentageLineComponent :prefix="'draws'" :percentage="stats.placementPercentageDraws" :placement="stats.placementPower" :max="stats.totalWizards"/>
+                        </div>
+                        <div class="d-flex justify-content-between ">
+                            <div>Ascensions:</div><div>8</div>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <PercentageLineComponent :prefix="'ascensions'" :percentage="42.84" :placement="622" :max="stats.totalPlayers" />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Wins:</div><div>{{ wizard.wins }} ({{ (wizard.wins / wizardBattles) * 100 }}%)</div>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Losses:</div><div>{{ wizard.losses }} ({{ (wizard.losses / wizardBattles) * 100 }}%)</div>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-                <div>Draws:</div><div>{{ wizard.draws }} ({{ (wizard.draws / wizardBattles) * 100 }}%)</div>
+            <div class="mb-5 col-12 col-md-7" ref="powerchart">
+                <LineChartComponent v-if="!loadingStats" :datacollection="datasetPower"/>
             </div>
         </div>
     </div>
-    <div class="w-100 d-flex flex-column ml-md-5">
-        <div class="w-100 mt-5 mt-md-0">
-            <h3 class="text-left"><u>Spells (NOT REAL DATA)</u></h3>
-            <div class="w-100 d-flex flex-column mb-3 text-left">
-                <h5>MOST USED COMBINATION</h5>
-                <div class="d-flex flex-wrap">
-                    <div class="mr-2" v-for="spell in wizard.commonMoveSet">
-                        <SpellComponent :color="true" :affinity="spell"></SpellComponent>
-                    </div>
-                    <div v-if="wizard.commonMoveSet.length === 0">N/A</div>
-                </div>
-            </div>
-            <div class="w-100 d-flex flex-column text-left">
-                <h5>MOST USED SPELLS</h5>
-                <div class="spell-probabilities d-flex flex-column" v-if="wizardSpellProbabilities.length > 0">
-                    <div class="spell-title d-flex flex-nowrap justify-content-between mr-n3" mr-n4>
-                        <div v-for="num in [1,2,3,4,5]">Spell {{ num }}</div>
-                    </div>
-                    <template v-for="moves in wizardSpellProbabilities">
-                        <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
-                            <div v-for="moveData in moves">
+    <div class="mx-n3 bg-dark py-4 px-3 position-relative">
+        <div class="spell-border position-absolute"></div>
+        <div class="container d-flex flex-wrap mb-4">
+            <h3 class="text-white w-100 text-left mb-3">Spells</h3>
+            <div class="mb-4 px-3 px-md-5 py-3 bg-white border border-dark">
+                <div class="d-flex flex-column text-left pt-3">
+                    <h5>MOST USED SPELLS</h5>
+                    <div class="spell-probabilities d-flex flex-column" v-if="wizard.commonMoves !== null">
+                        <template v-for="(moves, i) in wizardSpellProbabilities">
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="d-flex flex-column" v-for="(moveData, index) in moves">
+                                        <small v-if="i < 1">S{{ index+1 }}</small>
                                 <SpellComponent :color="true" :affinity="moveData[0]"></SpellComponent>
+                                </div>
                             </div>
-                        </div>
-                        <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
-                            <div class="mt-n1 mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
-                        </div>
-                    </template>
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
+                            </div>
+                        </template>
+                    </div>
+                    <div v-else>N/A</div>
                 </div>
-
-                <div v-else>N/A</div>
             </div>
         </div>
-        <div class="w-100 mt-5">
-            <h3 class="text-left"><u>Duels (NOT REAL DATA)</u></h3>
+    </div>
+    <div class="container pt-4 pb-5 position-relative">
+        <div class="cross-border position-absolute"></div>
+        <h3 class="text-left">Duels</h3>
+        <div class="w-100">
             <div v-if="!loadingDuels" :key="duel.duelId + '-' + duel.wiz1Id + '-' + duel.wiz2Id" class="mt-3" v-for="duel in duels">
                 <DuelComponent :wizard="wizard" :rawDuel="duel"></DuelComponent>
             </div>

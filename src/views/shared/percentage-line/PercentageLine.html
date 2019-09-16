@@ -1,0 +1,8 @@
+<div class="percentage-line position-relative d-flex align-items-end flex-column text-dark">
+    <div class="percentage-line__background w-100 bg-white border border-dark d-flex flex-nowrap">
+        <div :id="'fill-1-'+prefix" class="percentage-line__fill percentage-line__fill--green"></div>
+        <div :id="'fill-2-'+prefix" class="percentage-line__fill percentage-line__fill--yellow"></div>
+    </div>
+    <small v-if="percentage > 5">Top {{ percentage.toFixed(3) }}%</small>
+    <small v-else>{{ placement }}/{{ max }}</small>
+</div>

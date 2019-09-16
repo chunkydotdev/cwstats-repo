@@ -1,8 +1,13 @@
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Wizard } from '@/shared/models/Wizard';
 import router from '@/router';
+import AffinityComponent from '../affinity/Affinity';
 
-@Component({})
+@Component({
+    components: {
+        AffinityComponent,
+    },
+})
 export default class WizardImageComponent extends Vue {
     @Prop()
     public affinity!: number;
@@ -11,11 +16,12 @@ export default class WizardImageComponent extends Vue {
     @Prop()
     public loading!: boolean;
     @Prop()
+    public loadingAsset!: boolean;
+    @Prop()
     public forSale!: boolean;
 
     constructor() {
         super();
-
     }
 
     public get imageUrl(): string {

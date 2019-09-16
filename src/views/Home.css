@@ -8,6 +8,10 @@
   color: #fff24d !important;
 }
 
+.shadow {
+  box-shadow: 5px 5px 0 black !important;
+}
+
 .custom-select {
   background-color: #fff032;
   color: black;
@@ -28,8 +32,44 @@
   background-color: lightgreen !important;
 }
 
+.bg-yellow-1 {
+  background-color: #ffff85 !important;
+}
+
 .bg-dark {
   background-color: black !important;
+}
+
+.bg-pink {
+  background-color: #b79afc !important;
+}
+
+.text-pink {
+  color: #b79afc !important;
+}
+
+.bg-blue {
+  background-color: #35d1e7 !important;
+}
+
+.text-blue {
+  color: #35d1e7 !important;
+}
+
+.bg-red {
+  background-color: #ff809b !important;
+}
+
+.text-red {
+  color: #ff809b !important;
+}
+
+.bg-green {
+  background-color: #8bea63 !important;
+}
+
+.text-green {
+  color: #8bea63 !important;
 }
 
 .text-warning {
@@ -38,6 +78,10 @@
 
 .border-dark {
   border-color: black !important;
+}
+
+.text-dark {
+  color: black !important;
 }
 
 input {
@@ -51,6 +95,44 @@ input {
   color: white;
 }
 
+.btn-cw.active {
+  position: relative;
+}
+
+.btn-cw.active:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -15px;
+  height: 25px;
+  content: '';
+  background: url("../assets/udders-color.svg") no-repeat;
+  background-size: 25px;
+  background-position: top center;
+  animation: shake 1s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotateZ(0);
+  }
+  20% {
+    transform: rotateZ(45deg);
+  }
+  40% {
+    transform: rotateZ(-45deg);
+  }
+  60% {
+    transform: rotateZ(45deg);
+  }
+  80% {
+    transform: rotateZ(-45deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
 .home {
   margin-left: -15px;
   margin-right: -15px;
@@ -62,9 +144,9 @@ input {
 
 .home .high-scores {
   background: url("../assets/melted-cheeze.svg") repeat-x;
-  background-size: contain;
+  background-size: 101%;
   background-color: black;
-  background-position: top -5px left;
+  background-position: top -5px left -2px;
   color: white;
   padding-top: 5vh;
   min-height: 80vh;

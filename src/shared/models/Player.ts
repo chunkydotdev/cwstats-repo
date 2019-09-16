@@ -6,8 +6,12 @@ export default interface Player {
     duelCount: number;
     wizardCount: number;
     wizardPowerSum: number;
-    windMoveSet: number[];
-    fireMoveSet: number[];
-    waterMoveSet: number[];
-    basicMoveSet: number[];
+    windMoves: number[];
+    fireMoves: number[];
+    waterMoves: number[];
+    basicMoves: number[];
+    windMoveProbabilities: number[];
+    fireMoveProbabilities: number[];
+    waterMoveProbabilities: number[];
+    basicMoveProbabilities: number[];
 }

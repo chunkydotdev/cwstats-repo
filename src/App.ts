@@ -1,10 +1,12 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import router from '@/router';
 import FooterComponent from './views/shared/footer/Footer';
+import CookieFooterComponent from './views/shared/cookie-footer/CookieFooter';
 
 @Component({
     components: {
         FooterComponent,
+        CookieFooterComponent,
     },
 })
 export default class App extends Vue {
@@ -23,6 +25,13 @@ export default class App extends Vue {
         this.placeholder = 'Id...';
 
         this.currentRoute = router.currentRoute.name;
+    }
+
+    public get containerClass(): string {
+        if (this.currentRoute === 'home' || this.currentRoute === 'wizards' || this.currentRoute === 'players') {
+            return 'container-fluid overflow-hidden';
+        }
+        return 'container';
     }
 
     @Watch('$route')

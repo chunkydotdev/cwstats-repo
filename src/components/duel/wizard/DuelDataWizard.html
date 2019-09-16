@@ -1,93 +1,69 @@
-<div class="duel-data-wizard overflow-hidden pt-4 mt-n4" :class="{'duel-data-wizard--expanded': expanded}">
-    <div class="d-flex justify-content-between">
-        <div class="position-relative">
-            <div class="wiz-image position-relative bg-dark rounded-circle">
-                <div class="wiz-image--sizing overflow-hidden rounded-circle">
-                    <img :src="imageUrlWiz1" v-if="imageUrlWiz1 !== ''" />
-                    <div v-else class="d-flex justify-content-center align-items-center w-100">
-                        <div class="spinner mt-5 flex-shrink-0"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="wiz-id wiz-id--wiz1 text-right bg-dark text-white px-3 py-2 rounded">
-                <router-link class="text-white" :to="'/wizards/'+wizard.id">
-                    {{ wizard.id }}
-                </router-link>
-            </div>
-        </div>
-        <div class="d-flex align-items-center justify-content-center flex-shrink-2 w-100 flex-wrap px-2">
-            <div class="w-100 d-flex flex-nowrap justify-content-center py-3">
-                VS
-            </div>
-        </div>
-        <div class="position-relative">
-            <div class="wiz-image wiz-image--wiz2 bg-dark rounded-circle flex-shrink-0">
-                <div class="wiz-image--sizing overflow-hidden rounded-circle">
-                    <img :src="imageUrlWiz2" v-if="imageUrlWiz2 !== ''" />
-                    <div v-else class="d-flex justify-content-center align-items-center w-100">
-                        <div class="spinner mt-5 flex-shrink-0"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="wiz-id wiz-id--wiz2 text-left bg-dark text-white px-3 py-2 rounded">
-                <router-link class="text-white" :to="'/wizards/'+duel.wiz2Id">
-                    {{ duel.wiz2Id }}
-                </router-link>
-            </div>
-        </div>
-    </div>
+<div class="duel-data-wizard overflow-hidden w-100 px-3" :class="{'duel-data-wizard--expanded pt-4 mt-n4': expanded}">
     <div class="d-flex flex-nowrap mt-3">
         <div class="w-100 d-flex flex-wrap flex-md-nowrap justify-content-between">
             <div class="order-0">
                 <table class="duel-wizard-stats duel-wizard-stats--1 text-left">
                     <tr>
-                        <td><u>Pwr</u></td>
+                        <td>Start power:</td>
                     </tr>
                     <tr>
                         <td>{{ wiz1pwr }}</td>
                     </tr>
                     <tr>
-                        <td><u>Pwr+/-</u></td>
+                        <td>Owner:</td>
                     </tr>
                     <tr>
-                        <td>{{ readablePower(duel.wiz1PowerChange) }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="spell-order order-2 order-md-1 d-flex d-md-block flex-column mt-3 mt-md-0">
-                <table class="spell-order--table">
-                    <tr v-for="(spell, index) in wiz1Spells">
                         <td>
-                            <SpellComponent :win="isSpellWin(index, 1)" :critical="isSpellCritical(index, 1)" :affinity="spell"></SpellComponent>
-                        </td>
-                        <td class="px-3 text-nowrap">Spell {{ index }}</td>
-                        <td>
-                            <SpellComponent :win="isSpellWin(index, 2)" :critical="isSpellCritical(index, 2)" :affinity="wiz2Spells[index]"></SpellComponent>
+                            <router-link class="text-dark" :to="'/players/'+wizard.owner"> {{ wizard.owner.substring(0, 10) }}.. </router-link>
                         </td>
                     </tr>
                 </table>
-
-                <div class="d-flex w-100 justify-content-between flex-nowrap">
-                    <div>HITS: {{ wiz1pts }}</div>
-                    <div>HITS: {{ wiz2pts }}</div>
-                </div>
             </div>
+            <div class="spell-order order-2 order-md-1 d-flex d-md-block flex-column mt-3 mt-md-0"> </div>
 
             <div class="order-1 order-md-2">
                 <table class="duel-wizard-stats duel-wizard-stats--2 text-right">
                     <tr>
-                        <td><u>Pwr</u></td>
+                        <td>Start power:</td>
                     </tr>
                     <tr>
                         <td>{{ wiz2pwr }}</td>
                     </tr>
                     <tr>
-                        <td><u>Pwr+/-</u></td>
+                        <td>Owner:</td>
                     </tr>
                     <tr>
-                        <td>{{ readablePower(duel.wiz2PowerChange) }}</td>
+                        <td>
+                            <router-link class="text-dark" :to="'/players/'+wizard2.owner"> {{ wizard2.owner.substring(0, 10) }}.. </router-link>
+                        </td>
                     </tr>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="trendchart position-relative w-100 pt-3">
+        <h5>Score Timeline</h5>
+        <div class="trendchart__left-player position-absolute"></div>
+        <div class="trendchart__right-player position-absolute"></div>
+        <div class="trendchart__inline position-absolute"></div>
+        <TrendChart
+            class="trendchart__chart"
+            :id="scoreChartId"
+            :interactive="true"
+            :datasets="datasets"
+            :grid="grid"
+            :labels="labels"
+            :min="min"
+            :max="max"
+            @mouseMove="onMouseMove"
+        >
+        </TrendChart>
+        <div :id="'pop-'+duel.duelId" role="tooltip" :ref="'tooltip'+duel.duelId" class="tooltip-popper" :class="{'is-active': tooltipData}">
+            <div class="tooltip-popper-container" v-if="tooltipData">
+                <strong>{{ labels.xLabels[tooltipData.index] }}</strong>
+                <div class="tooltip-popper-data">
+                    <div class="tooltip-popper-data-item tooltip-popper-data-item--1">{{ tooltipData.data[0] }}</div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,111 +1,200 @@
-<div class="playerstats d-flex flex-nowrap flex-column flex-md-row py-5">
-    <div class="playerstats--info d-flex flex-column">
-        <PlayerImageComponent></PlayerImageComponent>
-        <div class="text-truncate mt-3">
-            <u>
+<div class="playerstats">
+    <div class="playerstats__intro bg-dark mx-n3 pt-5 position-relative">
+        <div class="playerstats__intro--overlay position-absolute"></div>
+        <div class="playerstats__img-container container position-relative">
+            <div class="playerstats__intro--owner py-2 bg-white rounded mb-2 position-absolute pr-3 text-truncate">
                 {{ playerAddress }}
-            </u>
-        </div>
-        <div class="d-flex justify-content-between mt-3">
-            <div>Wins</div>
-            <div>{{ player.wins }} ({{ (player.wins / playerBattles) * 100 }}%)</div>
-        </div>
-        <div class="d-flex justify-content-between mt-3">
-            <div>Losses</div>
-            <div>{{ player.losses }} ({{ (player.losses / playerBattles) * 100 }}%)</div>
-        </div>
-        <div class="d-flex justify-content-between mt-3">
-            <div>Draws</div>
-            <div>{{ player.draws }} ({{ (player.draws / playerBattles) * 100 }}%)</div>
+            </div>
+            <div class="playerstats__player-img mb-n5 position-relative">
+                <PlayerImageComponent></PlayerImageComponent>
+            </div>
         </div>
     </div>
-    <div class="w-100 d-flex flex-column ml-0 ml-md-5 text-left">
-        <div class="w-100 mt-5 mt-md-0">
-            <h3 class="text-left"><u>Common spells (NOT REAL DATA)</u></h3>
-            <div class="w-100 d-flex flex-column mb-3 text-left">
-                <div class="mb-2">
-                    <div class="mr-2 w-100">Basic combination</div>
-                    <div class="d-flex flex-wrap">
-                        <div class="mr-2" v-for="spell in player.basicMoveSet">
-                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+    <div class="container">
+        <div class="pt-5 pb-4 row">
+            <div class="col-12 d-flex justify-content-center">
+                <div v-if="loadingStats" class="spinner spinner--yellow-black"></div>
+            </div>
+            <div class="col-12 col-md-4 playerstats__stats" v-if="!loadingStats">
+                <div class="d-flex flex-column px-3 px-md-4 py-3 bg-white mb-5 shadow border border-dark ">
+                    <div class="d-flex justify-content-between">
+                        <div>Power:</div><div>{{ getReadablePower(player.wizardPowerSum) }}</div>
+                    </div>
+                    <div class="w-100 mb-2">
+                    <PercentageLineComponent :prefix="'power'" :percentage="stats.placementPercentagePower" :placement="stats.placementPower" :max="stats.totalPlayers" />
                         </div>
-                        <div v-if="player.basicMoveSet.length === 0">N/A</div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <div>Wins:</div><div>{{ player.wins }}</div>
+                    </div>
+                    <div class="w-100 mb-2">
+                        <PercentageLineComponent :prefix="'wins'" :percentage="stats.placementPercentageWins" :placement="stats.placementWins" :max="stats.totalPlayers" />
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <div>Losses:</div><div>{{ player.losses }}</div>
+                    </div>
+                    <div class="w-100 mb-2">
+                        <PercentageLineComponent :prefix="'losses'" :percentage="stats.placementPercentageLosses" :placement="stats.placementLosses" :max="stats.totalPlayers" />
+                    </div>
+                    <div class="d-flex justify-content-between ">
+                        <div>Draws:</div><div>{{ player.draws }}</div>
+                    </div>
+                    <div class="w-100 mb-2">
+                        <PercentageLineComponent :prefix="'draws'" :percentage="stats.placementPercentageDraws" :placement="stats.placementDraws" :max="stats.totalPlayers" />
+                    </div>
+                    <div class="d-flex justify-content-between ">
+                        <div>Ascensions:</div><div>8</div>
+                    </div>
+                    <div class="w-100 mb-2">
+                        <PercentageLineComponent :prefix="'ascensions'" :percentage="42.84" :placement="622" :max="stats.totalPlayers" />
                     </div>
                 </div>
-                <div class="mb-2">
-                    <div class="mr-2 w-100">Fire combination</div>
-                    <div class="d-flex flex-wrap">
-                        <div class="mr-2" v-for="spell in player.fireMoveSet">
-                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+            </div>
+            <div class="mb-5 col-12 col-md-7" ref="powerchart">
+                <LineChartComponent v-if="!loadingStats" :datacollection="datasetPower" />
+            </div>
+        </div>
+    </div>
+    <div class="mx-n3 bg-dark py-4 px-3 position-relative">
+        <div class="wizards-border spell-border position-absolute"></div>
+        <div class="container d-flex py-4 flex-wrap">
+            <h3 class="text-white text-left w-100 mb-4">Spells</h3>
+            <div class="d-flex flex-wrap mb-5 mr-5 px-3 px-md-5 py-3 bg-white shadow border border-dark" v-if="player.basicMoves.length > 0">
+                <div class="d-flex flex-column text-left pt-3">
+                    <h5 class="d-inline-block">BASIC WIZARDS</h5>
+                    <div class="spell-probabilities d-flex flex-column">
+                        <div v-for="(moves, i) in basicSpellProbabilities">
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="d-flex flex-column" v-for="(moveData, index) in moves">
+                                    <small v-if="i < 1">S{{ index+1 }}</small>
+                                    <SpellComponent :color="true" :affinity="moveData[0]"></SpellComponent>
+                                </div>
+                            </div>
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
+                            </div>
                         </div>
-                        <div v-if="player.fireMoveSet.length === 0">N/A</div>
                     </div>
                 </div>
-                <div class="mb-2">
-                    <div class="mr-2 w-100">Water combination</div>
-                    <div class="d-flex flex-wrap">
-                        <div class="mr-2" v-for="spell in player.waterMoveSet">
-                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+            </div>
+            <div class="d-flex flex-wrap mb-5 mr-5 px-3 px-md-5 py-3 bg-white shadow border border-dark" v-if="player.waterMoves.length > 0">
+                <div class="d-flex flex-column text-left pt-3">
+                    <h5 class="d-inline-block">WATER WIZARDS</h5>
+                    <div class="spell-probabilities d-flex flex-column">
+                        <div v-for="(moves, i) in waterSpellProbabilities">
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="d-flex flex-column" v-for="(moveData, index) in moves">
+                                    <small v-if="i < 1">S{{ index+1 }}</small>
+                                    <SpellComponent :color="true" :affinity="moveData[0]"></SpellComponent>
+                                </div>
+                            </div>
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
+                            </div>
                         </div>
-                        <div v-if="player.waterMoveSet.length === 0">N/A</div>
                     </div>
                 </div>
-                <div class="mb-2">
-                    <div class="mr-2 w-100">Wind combination</div>
-                    <div class="d-flex flex-wrap">
-                        <div class="mr-2" v-for="spell in player.windMoveSet">
-                            <SpellComponent :color="true" :affinity="spell"></SpellComponent>
+            </div>
+            <div class="d-flex flex-wrap mb-5 mr-5 px-3 px-md-5 py-3 bg-white shadow border border-dark" v-if="player.fireMoves.length > 0">
+                <div class="d-flex flex-column text-left pt-3">
+                    <h5 class="d-inline-block">FIRE WIZARDS</h5>
+                    <div class="spell-probabilities d-flex flex-column">
+                        <div v-for="(moves, i) in fireSpellProbabilities">
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="d-flex flex-column" v-for="(moveData, index) in moves">
+                                    <small v-if="i < 1">S{{ index+1 }}</small>
+                                    <SpellComponent :color="true" :affinity="moveData[0]"></SpellComponent>
+                                </div>
+                            </div>
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
+                            </div>
                         </div>
-                        <div v-if="player.windMoveSet.length === 0">N/A</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap mb-5 mr-5 px-3 px-md-5 py-3 bg-white shadow border border-dark" v-if="player.windMoves.length > 0">
+                <div class="d-flex flex-column text-left pt-3">
+                    <h5 class="d-inline-block">WIND WIZARDS</h5>
+                    <div class="spell-probabilities d-flex flex-column" >
+                        <div v-for="(moves, i) in windSpellProbabilities">
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="d-flex flex-column" v-for="(moveData, index) in moves">
+                                    <small v-if="i < 1">S{{ index+1 }}</small>
+                                    <SpellComponent :color="true" :affinity="moveData[0]"></SpellComponent>
+                                </div>
+                            </div>
+                            <div class="spell-probabilities__data d-flex flex-nowrap justify-content-between">
+                                <div class="mb-2" v-for="moveData in moves">{{ moveData[1] }}%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="w-100 mt-5 mt-md-0">
-            <h3 class="text-left"><u>Wizards</u></h3>
-            <h4>BASIC</h4>
-            <div class="w-100 d-flex flex-wrap">
-                <SmallWizardImageComponent
-                    class="mr-2 mb-2"
-                    :key="asset.wizard.id"
-                    :forSale="asset.forSale"
-                    :wizard="asset.wizard"
-                    v-for="asset in basicWizards"
-                ></SmallWizardImageComponent>
-                <div class="mr-2 mb-2" v-if="basicWizards.length === 0">N/A</div>
+        <div class="mt-5 mt-md-0 w-100">
+            <div v-if="basicWizards.length > 0" class="pb-5 bg-pink mx-n3 px-3">
+                <div class="container position-relative py-4">
+                    <div class="wizards-border basic-border position-absolute"></div>
+                    <h3 class="text-left mb-4">BASIC WIZARDS</h3>
+                    <div class="w-100 d-flex flex-wrap">
+                        <SmallWizardImageComponent
+                        class="mr-3 mb-3 shadow"
+                        :key="asset.wizard.id"
+                        :forSale="asset.forSale"
+                        :wizard="asset.wizard"
+                        v-for="asset in basicWizards"
+                        ></SmallWizardImageComponent>
+                        <div class="mr-2 mb-2" v-if="basicWizards.length === 0">N/A</div>
+                    </div>
+                </div>
             </div>
-            <h4>FIRE</h4>
-            <div class="w-100 d-flex flex-wrap">
-                <SmallWizardImageComponent
-                    class="mr-2 mb-2"
-                    :key="asset.wizard.id"
-                    :forSale="asset.forSale"
-                    :wizard="asset.wizard"
-                    v-for="asset in fireWizards"
-                ></SmallWizardImageComponent>
-                <div class="mr-2 mb-2" v-if="fireWizards.length === 0">N/A</div>
+            <div v-if="waterWizards.length > 0" class="pb-5 bg-blue mx-n3 px-3">
+                <div class="container position-relative py-4">
+                    <div class="wizards-border water-border position-absolute" :class="{'water-border--first': showWaterBorderColor}"></div>
+                    <h3 class="text-left mb-4">WATER WIZARDS</h3>
+                    <div class="w-100 d-flex flex-wrap">
+                        <SmallWizardImageComponent
+                        class="mr-3 mb-3 shadow"
+                        :key="asset.wizard.id"
+                        :forSale="asset.forSale"
+                        :wizard="asset.wizard"
+                        v-for="asset in waterWizards"
+                        ></SmallWizardImageComponent>
+                        <div class="mr-2 mb-2" v-if="waterWizards.length === 0">N/A</div>
+                    </div>
+                </div>
             </div>
-            <h4>WATER</h4>
-            <div class="w-100 d-flex flex-wrap">
-                <SmallWizardImageComponent
-                    class="mr-2 mb-2"
-                    :key="asset.wizard.id"
-                    :forSale="asset.forSale"
-                    :wizard="asset.wizard"
-                    v-for="asset in waterWizards"
-                ></SmallWizardImageComponent>
-                <div class="mr-2 mb-2" v-if="waterWizards.length === 0">N/A</div>
+            <div v-if="fireWizards.length > 0" class="pb-5 bg-red mx-n3 px-3">
+                <div class="container position-relative py-4">
+                    <div class="wizards-border fire-border position-absolute" :class="{'fire-border--first': showFireBorderColor}"></div>
+                    <h3 class="text-left mb-4">FIRE WIZARDS</h3>
+                    <div class="w-100 d-flex flex-wrap">
+                        <SmallWizardImageComponent
+                        class="mr-3 mb-3 shadow"
+                        :key="asset.wizard.id"
+                        :forSale="asset.forSale"
+                        :wizard="asset.wizard"
+                        v-for="asset in fireWizards"
+                        ></SmallWizardImageComponent>
+                        <div class="mr-2 mb-2" v-if="fireWizards.length === 0">N/A</div>
+                    </div>
+                </div>
             </div>
-            <h4>WIND</h4>
-            <div class="w-100 d-flex flex-wrap">
-                <SmallWizardImageComponent
-                    class="mr-2 mb-2"
-                    :key="asset.wizard.id"
-                    :forSale="asset.forSale"
-                    :wizard="asset.wizard"
-                    v-for="asset in windWizards"
-                ></SmallWizardImageComponent>
-                <div class="mr-2 mb-2" v-if="windWizards.length === 0">N/A</div>
+            <div v-if="windWizards.length > 0" class="pb-5 bg-green mx-n3 px-3">
+                <div class="container position-relative py-4">
+                    <div class="wizards-border wind-border position-absolute" :class="{'wind-border--first': showWindBorderColor}"></div>
+                    <h3 class="text-left mb-4">WIND WIZARDS</h3>
+                    <div class="w-100 d-flex flex-wrap">
+                        <SmallWizardImageComponent
+                        class="mr-3 mb-3 shadow"
+                        :key="asset.wizard.id"
+                        :forSale="asset.forSale"
+                        :wizard="asset.wizard"
+                        v-for="asset in windWizards"
+                        ></SmallWizardImageComponent>
+                        <div class="mr-2 mb-2" v-if="windWizards.length === 0">N/A</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

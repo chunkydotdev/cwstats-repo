@@ -10,6 +10,7 @@ export default interface Duel {
     isAscensionBattle: boolean;
     moveSet1: number[];
     moveSet2: number[];
+    historicScores: number[];
     power1: number;
     power2: number;
     timedOut: boolean;

@@ -5,28 +5,106 @@
 @import '../../shared/scss/spinner.scss';
 
 .duel {
-    outline: 1px solid black;
-    border: 5px solid white;
-    &--inner-outline {
-        outline: 1px solid black;
+    background-color: #f0f0f0;
 
-        .expand-duel {
-            height: 20px;
-            //background: url('../../assets/book-light.svg') no-repeat;
-            //background-position: center center;
-            //background-size: 15px;
+    &__result {
+        width: 10px;
+    }
+
+    .expand-duel {
+        background-color: #ccc !important;
+        outline-color: lightskyblue !important;
+
+        &--expanded {
             .fa-caret-down {
-                color: white;
-            }
-
-            &--expanded {
-                .fa-caret-down {
-                    transform: rotateZ(180deg);
-                    transition: all 0.2s;
-                }
+                transform: rotateZ(180deg);
             }
         }
     }
+
+    .wiz-id {
+        top: 45px;
+        width: 60px;
+        font-size: 0.7rem;
+        opacity: 0.9;
+
+        @include media-breakpoint-up(md) {
+            top: 64px;
+            width: 80px;
+        }
+
+        &--wiz1 {
+            left: 0px;
+        }
+
+        &--wiz2 {
+            right: 0px;
+        }
+    }
+
+    .wiz-image {
+        width: 50px;
+        height: 50px;
+
+        @include media-breakpoint-up(md) {
+            width: 80px;
+            height: 80px;
+        }
+
+        &--wiz2 {
+            img {
+                margin-left: -45px !important;
+                transform: scaleX(-1);
+
+                @include media-breakpoint-up(md) {
+                    margin-left: -100px !important;
+                }
+            }
+        }
+
+        &--sizing {
+            position: absolute;
+            top: -10px;
+            left: -2.5px;
+            width: 55px;
+            height: 60px;
+
+            @include media-breakpoint-up(md) {
+                width: 95px;
+                height: 98px;
+                top: -21px;
+                left: -7px;
+            }
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+            margin-top: -25px;
+            margin-left: -50px;
+
+            @include media-breakpoint-up(md) {
+                width: 300px;
+                margin-top: -50px;
+                margin-left: -100px;
+            }
+        }
+    }
+
+    .spell-order {
+        width: 100%;
+
+        @include media-breakpoint-up(md) {
+            width: auto;
+        }
+
+        &--table {
+            tr {
+                height: 20px;
+            }
+        }
+    }
+
 }
 
 .win {
@@ -38,5 +116,5 @@
 }
 
 .loss {
-    background-color: lighten(lightcoral, 10%);
+    background-color: lighten(lightcoral, 15%);
 }

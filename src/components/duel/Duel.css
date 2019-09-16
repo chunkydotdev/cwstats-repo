@@ -8,6 +8,10 @@
   color: #fff24d !important;
 }
 
+.shadow {
+  box-shadow: 5px 5px 0 black !important;
+}
+
 .custom-select {
   background-color: #fff032;
   color: black;
@@ -28,6 +32,10 @@
   background-color: lightgreen !important;
 }
 
+.bg-yellow-1 {
+  background-color: #ffff85 !important;
+}
+
 .bg-dark {
   background-color: black !important;
 }
@@ -38,6 +46,10 @@
 
 .border-dark {
   border-color: black !important;
+}
+
+.text-dark {
+  color: black !important;
 }
 
 input {
@@ -112,25 +124,111 @@ input {
 }
 
 .duel {
-  outline: 1px solid black;
-  border: 5px solid white;
+  background-color: #f0f0f0;
 }
 
-.duel--inner-outline {
-  outline: 1px solid black;
+.duel__result {
+  width: 10px;
 }
 
-.duel--inner-outline .expand-duel {
-  height: 20px;
+.duel .expand-duel {
+  background-color: #ccc !important;
+  outline-color: lightskyblue !important;
 }
 
-.duel--inner-outline .expand-duel .fa-caret-down {
-  color: white;
-}
-
-.duel--inner-outline .expand-duel--expanded .fa-caret-down {
+.duel .expand-duel--expanded .fa-caret-down {
   transform: rotateZ(180deg);
-  transition: all 0.2s;
+}
+
+.duel .wiz-id {
+  top: 45px;
+  width: 60px;
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .duel .wiz-id {
+    top: 64px;
+    width: 80px;
+  }
+}
+
+.duel .wiz-id--wiz1 {
+  left: 0px;
+}
+
+.duel .wiz-id--wiz2 {
+  right: 0px;
+}
+
+.duel .wiz-image {
+  width: 50px;
+  height: 50px;
+}
+
+@media (min-width: 768px) {
+  .duel .wiz-image {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.duel .wiz-image--wiz2 img {
+  margin-left: -45px !important;
+  transform: scaleX(-1);
+}
+
+@media (min-width: 768px) {
+  .duel .wiz-image--wiz2 img {
+    margin-left: -100px !important;
+  }
+}
+
+.duel .wiz-image--sizing {
+  position: absolute;
+  top: -10px;
+  left: -2.5px;
+  width: 55px;
+  height: 60px;
+}
+
+@media (min-width: 768px) {
+  .duel .wiz-image--sizing {
+    width: 95px;
+    height: 98px;
+    top: -21px;
+    left: -7px;
+  }
+}
+
+.duel .wiz-image img {
+  width: 150px;
+  height: auto;
+  margin-top: -25px;
+  margin-left: -50px;
+}
+
+@media (min-width: 768px) {
+  .duel .wiz-image img {
+    width: 300px;
+    margin-top: -50px;
+    margin-left: -100px;
+  }
+}
+
+.duel .spell-order {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .duel .spell-order {
+    width: auto;
+  }
+}
+
+.duel .spell-order--table tr {
+  height: 20px;
 }
 
 .win {
@@ -142,5 +240,5 @@ input {
 }
 
 .loss {
-  background-color: #f5aeae;
+  background-color: #f8c4c4;
 }

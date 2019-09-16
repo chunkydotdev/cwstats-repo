@@ -10,4 +10,8 @@ export interface Wizard {
     commonMoveSet: number[];
     commonMoves: number[];
     commonMovesProbabilities: number[];
+    historicWin: number[];
+    historicLoss: number[];
+    historicDraw: number[];
+    historicPower: number[];
 }

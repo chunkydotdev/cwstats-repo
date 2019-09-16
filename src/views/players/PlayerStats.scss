@@ -4,7 +4,121 @@
 @import '../../shared/scss/bootstrap-ext.scss';
 
 .playerstats {
+    .wizards-border {
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        left: -100vw;
+        right: -100vw;
+
+        &.spell-border {
+            background-image: url('../../assets/book-dark.svg');
+            background-size: 40px !important;
+            height: 38px;
+            top: -36px;
+        }
+
+
+
+        &.basic-border {
+            background-image: url('../../assets/basic-purple.svg');
+            background-size: 40px;
+            height: 40px;
+            top: -32px;
+        }
+
+        &.water-border {
+            background-image: url('../../assets/water.svg');
+
+            &--first {
+                background-image: url('../../assets/water-blue.svg') !important;
+            }
+
+            background-size: 40px !important;
+            height: 34px;
+            top: -34px;
+            border-bottom: 3px solid black;
+        }
+
+        &.fire-border {
+            background-image: url('../../assets/fire.svg');
+
+            &--first {
+                background-image: url('../../assets/fire-red.svg') !important;
+            }
+
+            background-size: 40px !important;
+            height: 45px;
+            top: -45px;
+            border-bottom: 3px solid black;
+        }
+
+        &.wind-border {
+            background-image: url('../../assets/wind.svg');
+
+            &--first {
+                background-image: url('../../assets/wind-green.svg') !important;
+            }
+
+            background-size: 40px !important;
+            height: 38px;
+            top: -38px;
+            border-bottom: 3px solid black;
+        }
+    }
+
     &--info {
         max-width: 220px;
     }
+
+    &__intro {
+        background: url('../../assets/grid-white.svg');
+        background-position: bottom -1px left -1px;
+
+        &--owner {
+            padding-left: 230px;
+            bottom: 0;
+            left: 0;
+            max-width: 100%;
+        }
+
+        &--overlay {
+            background: linear-gradient(#000, #000, rgba(0, 0, 0, 0));
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+
+    &__player-img {
+        z-index: 1;
+    }
+
+    &__img-container {
+        height: 200px;
+    }
+
+    &__stats {
+        min-width: 280px;
+    }
+
+    .spell-probabilities {
+        width: 220px;
+        border-collapse: collapse;
+
+        @include media-breakpoint-up(sm) {
+            width: 260px;
+        }
+
+        tr {
+            max-height: 35px;
+
+            td {
+                max-height: 35px;
+                width: 50px;
+            }
+
+        }
+    }
+
 }
