@@ -13,7 +13,7 @@
         "chart.js": "^2.8.0",
         "core-js": "^2.6.5",
         "popper.js": "^1.15.0",
-        "qs": "^6.7.0",
+        "qs": "^6.7.3",
         "vue": "^2.6.10",
         "vue-chartjs": "^3.4.2",
         "vue-class-component": "^7.0.2",
